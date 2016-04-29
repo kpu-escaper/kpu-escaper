@@ -1,0 +1,471 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: SimpleLaser_reflective
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.42353678, y: 48.5722733, z: 3.21232557}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95bdfe7476280ba478ac44cdcba5b058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arcs:
+  - material: {fileID: 2100000, guid: bc9b4591c08a2ed4fbd35d64e5b2437b, type: 2}
+    colorOptions:
+      startColor:
+        key0:
+          serializedVersion: 2
+          rgba: 255
+        key1:
+          serializedVersion: 2
+          rgba: 4278190335
+        key2:
+          serializedVersion: 2
+          rgba: 4278190335
+        key3:
+          serializedVersion: 2
+          rgba: 0
+        key4:
+          serializedVersion: 2
+          rgba: 0
+        key5:
+          serializedVersion: 2
+          rgba: 0
+        key6:
+          serializedVersion: 2
+          rgba: 0
+        key7:
+          serializedVersion: 2
+          rgba: 0
+        ctime0: 0
+        ctime1: 31804
+        ctime2: 65535
+        ctime3: 0
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 8867
+        atime2: 56283
+        atime3: 65535
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_NumColorKeys: 3
+        m_NumAlphaKeys: 4
+      onlyStartColor: 1
+      endColor:
+        key0:
+          serializedVersion: 2
+          rgba: 39423
+        key1:
+          serializedVersion: 2
+          rgba: 4278224127
+        key2:
+          serializedVersion: 2
+          rgba: 4278190335
+        key3:
+          serializedVersion: 2
+          rgba: 0
+        key4:
+          serializedVersion: 2
+          rgba: 0
+        key5:
+          serializedVersion: 2
+          rgba: 0
+        key6:
+          serializedVersion: 2
+          rgba: 0
+        key7:
+          serializedVersion: 2
+          rgba: 0
+        ctime0: 0
+        ctime1: 65535
+        ctime2: 65535
+        ctime3: 0
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 8867
+        atime2: 56283
+        atime3: 65535
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_NumColorKeys: 2
+        m_NumAlphaKeys: 4
+      coreColor:
+        key0:
+          serializedVersion: 2
+          rgba: 4294967295
+        key1:
+          serializedVersion: 2
+          rgba: 4294967295
+        key2:
+          serializedVersion: 2
+          rgba: 0
+        key3:
+          serializedVersion: 2
+          rgba: 0
+        key4:
+          serializedVersion: 2
+          rgba: 0
+        key5:
+          serializedVersion: 2
+          rgba: 0
+        key6:
+          serializedVersion: 2
+          rgba: 0
+        key7:
+          serializedVersion: 2
+          rgba: 0
+        ctime0: 0
+        ctime1: 65535
+        ctime2: 0
+        ctime3: 0
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 65535
+        atime2: 0
+        atime3: 0
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_NumColorKeys: 2
+        m_NumAlphaKeys: 2
+      coreCurve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0
+          inSlope: .675163448
+          outSlope: .675163448
+          tangentMode: 10
+        - time: .899713755
+          value: .607453823
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 1
+          value: 0
+          inSlope: -6.05719995
+          outSlope: -6.05719995
+          tangentMode: 10
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+      coreJitter: .100000001
+      fade: 1
+      fadePoint: .300000012
+    sizeOptions:
+      interpolation: 1
+      startWidthCurve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: .0166307297
+          inSlope: .314351141
+          outSlope: .314351141
+          tangentMode: 10
+        - time: .900109291
+          value: .29958111
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 1.00098813
+          value: .01360696
+          inSlope: -2.8348279
+          outSlope: -2.8348279
+          tangentMode: 10
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+      onlyStartWidth: 1
+      endWidthCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+      segmentLength: 2
+      snapSegmentsToShape: 1
+      numberOfSmoothingSegments: 0
+      minNumberOfSegments: 10
+    propagationOptions:
+      propagationType: 0
+      globalSpeed: 200
+      timeCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+    emissionOptions:
+    - emit: 1
+      shurikenPrefab: {fileID: 100000, guid: 84c37d92f3a513b4da7845981cd12ba7, type: 2}
+      emitAfterRayDeath: 1
+      particlesPerMeter: 200
+      emissionDuringLifetime:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: -.00172698207
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: .900192976
+          value: -.0020951156
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: .948616624
+          value: 1.00171888
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 1
+          value: .0030867625
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+      radiusCoefDuringLifetime:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: .232066333
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 1
+          value: .232066333
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+      directionDuringLifetime:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+      startColorByRay: 1
+    spatialNoise: []
+    textureOptions:
+      shapeTexture: {fileID: 0}
+      noiseTexture: {fileID: 0}
+      noiseCoef:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+      animateTexture: 0
+      tileSize: 0
+      noiseSpeed: 0
+    lightsOptions:
+      lights: 1
+      lightsRange: 7.5
+      lightsIntensityMultiplyer: 5
+      renderMode: 1
+      priority: 0
+    flaresOptions:
+      startFlare:
+        enabled: 0
+        flare: {fileID: 0}
+        fadeSpeed: 50
+        maxBrightness: 0
+        maxBrightnessDistance: 0
+        minBrightness: 0
+        minBrightnessDistance: 0
+        ignoreLayers:
+          serializedVersion: 2
+          m_Bits: 6
+      endFlare:
+        enabled: 1
+        flare: {fileID: 12100000, guid: e59f068002a7b47858274b3c71e10ea7, type: 2}
+        fadeSpeed: 50
+        maxBrightness: .5
+        maxBrightnessDistance: 0
+        minBrightness: .100000001
+        minBrightnessDistance: 50
+        ignoreLayers:
+          serializedVersion: 2
+          m_Bits: 6
+      useNoiseMask: 0
+      noiseMaskPowerCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+    nesting:
+      Nested: 0
+      parentArcIndex: 0
+      combinedNesting: 0
+      secondaryArcIndex: 0
+      nestingCoef: 0
+    oscillations: []
+    shapeCurves: []
+  camera: {fileID: 0}
+  lifetime: 5
+  playbackType: 1
+  elapsedTime: 0
+  freeze: 0
+  interpolation: 1
+  easeInOutOptions:
+    useEaseInOut: 0
+    easeInOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - time: -.0125000002
+        value: 1.01520979
+        inSlope: -.0709883422
+        outSlope: -.0709883422
+        tangentMode: 10
+      - time: .517170906
+        value: .977609336
+        inSlope: -.0225149542
+        outSlope: -.0225149542
+        tangentMode: 10
+      - time: 1
+        value: .990142822
+        inSlope: .0259584319
+        outSlope: .0259584319
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    distance: 100
+  shapeTransforms: []
+  shapePoints: []
+  transformsDestructionFlags: 
+  closedShape: 0
+  oscillationNormal: {x: 0, y: 1, z: 0}
+  localSpaceOcillations: 0
+  reinitThreshold: .5
+  performancePriority: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: shapeTransforms.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lifetime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: freeze
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playbackType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: interpolation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.useEaseInOut
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.easeInOutCurve.m_Curve.Array.data[0].value
+      value: 1.0152098
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.easeInOutCurve.m_Curve.Array.data[0].inSlope
+      value: -0.07098834
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.easeInOutCurve.m_Curve.Array.data[0].outSlope
+      value: -0.07098834
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.easeInOutCurve.m_Curve.Array.data[1].inSlope
+      value: -0.022514954
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.easeInOutCurve.m_Curve.Array.data[1].outSlope
+      value: -0.022514954
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.easeInOutCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.easeInOutCurve.m_Curve.Array.data[0].time
+      value: -0.0125
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.easeInOutCurve.m_Curve.Array.data[1].value
+      value: 0.97760934
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.easeInOutCurve.m_Curve.Array.data[2].inSlope
+      value: 0.025958432
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.easeInOutCurve.m_Curve.Array.data[2].outSlope
+      value: 0.025958432
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.easeInOutCurve.m_Curve.Array.data[1].time
+      value: 0.5171709
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.easeInOutCurve.m_Curve.Array.data[2].value
+      value: 0.9901428
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.easeInOutCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: easeInOutOptions.distance
+      value: 100
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
