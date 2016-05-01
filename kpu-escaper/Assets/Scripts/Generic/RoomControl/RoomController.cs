@@ -263,6 +263,7 @@ public class RoomController : MonoBehaviour
             }
         }
         //RoomsObject[]
+		//DoorArrange ();
 
     }
 
@@ -292,18 +293,30 @@ public class RoomController : MonoBehaviour
         }
     }
 
+	/*void DoorArrange(){
+		Debug.Log ("on");
+		for(int i = 0; i < RoomsObject.Length; ++i){
+			if(RoomsObject[i].name != CurrentRoom._name){
+				RoomsObject[i].transform.FindChild("Box002").gameObject.SetActive(false);
+			}
+		}
+	}*/
+
     void SetRoomColor(RoomColor _Color, Transform _RoomObject) //실제 게임오브젝트의 방 색을 바꿔주는 루틴
     {
         for (int ChildIndex = 0; ChildIndex < _RoomObject.childCount; ++ChildIndex)
         {
             Transform childTransform = _RoomObject.GetChild(ChildIndex);
             Renderer ObjectRenderer = childTransform.GetComponent<Renderer>();
-			if(childTransform.CompareTag("Door"))				///////////////////////
-				childTransform.gameObject.SetActive(false);     /////////////////////// 
-			if (gameObject.name == CurrentRoom._name){
-				if(childTransform.CompareTag("Door"))				///////////////////////
-					childTransform.gameObject.SetActive(true);     /////////////////////// 
-			}
+			if(childTransform.CompareTag("Door"))	{	///////////////////////
+				//Debug.Log (_RoomObject.parent.name.ToString());
+				childTransform.gameObject.SetActive(true); 
+			}/////////////////////// 
+			//if (_RoomObject.parent.name == CurrentRoom._name){
+			//	Debug.Log ("in");
+			//	if(childTransform.CompareTag("Door"))				///////////////////////
+			//		childTransform.gameObject.SetActive(true);     /////////////////////// 
+			//}
 
             if (ObjectRenderer)
             {
