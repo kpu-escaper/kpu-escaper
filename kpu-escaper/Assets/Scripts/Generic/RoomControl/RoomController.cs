@@ -293,6 +293,7 @@ public class RoomController : MonoBehaviour
         }
     }
 
+	//현재방의 문은 on 주변방의 문은 off
 	void DoorArrange(){		
 		for (int i=0; i<RoomsObject.Length; ++i) {
 			if (RoomsObject [i].name == CurrentRoom._name) {
@@ -303,7 +304,7 @@ public class RoomController : MonoBehaviour
 			}
 		}
 	}
-
+	
 	void FindChild(bool _Current, Transform _RoomObject){
 		for (int ChildIndex = 0; ChildIndex <_RoomObject.childCount; ++ChildIndex) {
 			Transform childTransform = _RoomObject.GetChild(ChildIndex);
