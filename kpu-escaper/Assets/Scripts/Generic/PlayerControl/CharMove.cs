@@ -17,7 +17,7 @@ public class CharMove : MonoBehaviour {
 	void Update () {
 
 		if (Input.GetKeyDown (KeyCode.LeftShift)) {
-			GetComponent<Animator> ().SetBool ("isRunning", true);
+			GetComponent<Animator> ().SetBool ("isRunning", true); 
 		}
 		else if(Input.GetKeyUp (KeyCode.LeftShift))
 		{
@@ -60,6 +60,10 @@ public class CharMove : MonoBehaviour {
 		
 		else if (Input.GetKeyUp (KeyCode.D)) {
 			isRight = false;
+		}
+
+		if (Input.GetKeyDown (KeyCode.Q)) {
+			GetComponent<Animator> ().SetBool ("isJumping", true);
 		}
 
 		if(!isRight && !isLeft && !isBack && !isFront)

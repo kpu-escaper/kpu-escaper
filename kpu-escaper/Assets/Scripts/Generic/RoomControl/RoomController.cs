@@ -264,6 +264,7 @@ public class RoomController : MonoBehaviour
         }
         //RoomsObject[]
 		DoorArrange ();
+		BlockTheDoor();
 
     }
 
@@ -303,6 +304,36 @@ public class RoomController : MonoBehaviour
 				FindChild(false, RoomsObject[i].transform);
 			}
 		}
+	}
+
+	//임시로 기능적인 부분만 실행하기 위해서 작성
+	void BlockTheDoor(){
+		for (int i = 0; i < RoomsObject.Length; ++i)
+		{
+			if (RoomsObject[i].name == CurrentRoom._name && CurrentRoom._type == RoomType.Main)
+			{
+				//Debug.Log (CurrentRoom._type);
+				RoomsObject[i].transform.FindChild("wall_1").GetComponent<DoorController>().block = false;
+				RoomsObject[i].transform.FindChild("wall_2").GetComponent<DoorController>().block = false;
+				RoomsObject[i].transform.FindChild("wall_3").GetComponent<DoorController>().block = false;
+				RoomsObject[i].transform.FindChild("wall_4").GetComponent<DoorController>().block = false;
+				RoomsObject[i].transform.FindChild("wall_5").GetComponent<DoorController>().block = false;
+				RoomsObject[i].transform.FindChild("wall_6").GetComponent<DoorController>().block = false;
+			}
+		}
+	}
+	//임시로 기능적인 부분만 실행하기 위해서 작성
+	public void UnBlockTheDoor(){
+		for (int i = 0; i < RoomsObject.Length; ++i) {
+			if (RoomsObject [i].name == CurrentRoom._name) {
+				RoomsObject [i].transform.FindChild ("wall_1").GetComponent<DoorController> ().block = true;
+				RoomsObject [i].transform.FindChild ("wall_2").GetComponent<DoorController> ().block = true;
+				RoomsObject [i].transform.FindChild ("wall_3").GetComponent<DoorController> ().block = true;
+				RoomsObject [i].transform.FindChild ("wall_4").GetComponent<DoorController> ().block = true;
+				RoomsObject [i].transform.FindChild ("wall_5").GetComponent<DoorController> ().block = true;
+				RoomsObject [i].transform.FindChild ("wall_6").GetComponent<DoorController> ().block = true;
+			}
+		}			
 	}
 	
 	void FindChild(bool _Current, Transform _RoomObject){

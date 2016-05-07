@@ -10,6 +10,7 @@ TagManager:
   - Trap
   - Clue
   - Door
+  - MedievalTrap
   layers:
   - Default
   - TransparentFX
