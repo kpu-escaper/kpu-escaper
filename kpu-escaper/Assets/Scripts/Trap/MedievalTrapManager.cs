@@ -27,7 +27,7 @@ public class MedievalTrapManager : RoomPropertyController
     {
         while(true)
         {
-            for (int i = 0; i < 5; ++i)
+            for (int i = 0; i < 10; ++i)
             {
                 int randomInt = Random.Range(0, Trap.Length);
 				thornPos = new Vector3(Random.Range (-1106, 890),0,Random.Range (-980,1207));

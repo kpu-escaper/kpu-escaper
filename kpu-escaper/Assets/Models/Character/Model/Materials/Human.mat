@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 6f57e775fba8d1f48bf4606233bd1b53, type: 3}
+          m_Texture: {fileID: 2800000, guid: 8d7ee9f53931df347bf4ac3d4f671e6e, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
