@@ -3,14 +3,15 @@ using System.Collections;
 
 public class DoorController : MonoBehaviour {
 
-	bool check = false;
+	bool isCollision = false;
+	bool isKeyDown = false;
 	public bool block = true; //임시로 추가
 
 	void OnTriggerEnter(Collider col)
 	{
 		if(col.CompareTag("Player"))
 		{
-			check = true;
+			isCollision = true;
 		}    	
 	}
 
@@ -18,12 +19,16 @@ public class DoorController : MonoBehaviour {
 	{
 		if(col.CompareTag("Player"))
 		{
-			check = false;
+			isCollision = false;
+			isKeyDown = false;
 		}   
 	}
 
 	void Update () {
-		if (check && block) {
+		if (Input.GetKey (KeyCode.E)) {
+			isKeyDown = true;
+		}
+		if (isCollision && block && isKeyDown) {
 			transform.FindChild ("Box002").localPosition = Vector3.Lerp (transform.FindChild ("Box002").localPosition, new Vector3 (0, 0.6f, 0), Time.deltaTime * 1.2f);
 			transform.FindChild ("Box003").localPosition = Vector3.Lerp (transform.FindChild ("Box003").localPosition, new Vector3 (0, -0.6f, 0), Time.deltaTime * 1.2f);
 		} else {
