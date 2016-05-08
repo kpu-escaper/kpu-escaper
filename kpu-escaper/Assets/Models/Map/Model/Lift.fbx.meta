@@ -1,56 +1,16 @@
 fileFormatVersion: 2
-guid: 8985049c22e4e6d48a73ba49152eaf5f
-timeCreated: 1457865023
-licenseType: Free
+guid: e2918420ed3864a45897b5f66ec0c11d
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: Box001
-    100002: Box002
-    100004: Box003
-    100006: Object003
-    100008: Object004
-    100010: Plane003
-    100012: Plane004
-    100014: //RootNode
-    400000: Box001
-    400002: Box002
-    400004: Box003
-    400006: Object003
-    400008: Object004
-    400010: Plane003
-    400012: Plane004
-    400014: //RootNode
-    2300000: Box001
-    2300002: Box002
-    2300004: Box003
-    2300006: Object003
-    2300008: Object004
-    2300010: Plane003
-    2300012: Plane004
-    3300000: Box001
-    3300002: Box002
-    3300004: Box003
-    3300006: Object003
-    3300008: Object004
-    3300010: Plane003
-    3300012: Plane004
-    4300000: Box001
-    4300002: Plane003
-    4300004: Plane004
-    4300006: Box002
-    4300008: Box003
-    4300010: Object003
-    4300012: Object004
-    6400000: Box001
-    6400002: Box002
-    6400004: Box003
-    6400006: Object003
-    6400008: Object004
-    6400010: Plane003
-    6400012: Plane004
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cube
+    6400000: //RootNode
+    7400000: Default Take
     9500000: //RootNode
-    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -75,8 +35,8 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 3
-    addColliders: 0
+    meshCompression: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -88,13 +48,13 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
-    normalImportMode: 0
-    tangentImportMode: 4
-  importAnimation: 0
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
@@ -109,7 +69,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
