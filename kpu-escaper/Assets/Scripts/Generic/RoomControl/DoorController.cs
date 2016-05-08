@@ -5,7 +5,15 @@ public class DoorController : MonoBehaviour {
 
 	bool isCollision = false;
 	bool isKeyDown = false;
-	public bool block = true; //임시로 추가
+	public bool block = false; //임시로 추가
+
+	public static DoorController instance;
+	
+	void Awake()
+	{
+		if (instance == null)
+			instance = this;
+	}
 
 	void OnTriggerEnter(Collider col)
 	{
@@ -25,10 +33,10 @@ public class DoorController : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKey (KeyCode.E)) {
+		if (Input.GetKeyDown (KeyCode.E)) {
 			isKeyDown = true;
 		}
-		if (isCollision && block && isKeyDown) {
+		if (isCollision && !block && isKeyDown) {
 			transform.FindChild ("Box002").localPosition = Vector3.Lerp (transform.FindChild ("Box002").localPosition, new Vector3 (0, 0.6f, 0), Time.deltaTime * 1.2f);
 			transform.FindChild ("Box003").localPosition = Vector3.Lerp (transform.FindChild ("Box003").localPosition, new Vector3 (0, -0.6f, 0), Time.deltaTime * 1.2f);
 		} else {
@@ -37,9 +45,7 @@ public class DoorController : MonoBehaviour {
 		}
 		if (Input.GetKeyDown (KeyCode.M)) {
 			RoomController.instance.UnBlockTheDoor();
+			LiftManager.instance.TurnOnManager();
 		}
-	}
-
-	void Start(){
 	}
 }

@@ -7,11 +7,25 @@ public class CharMove : MonoBehaviour {
 	bool isRight = false;
 	bool isFront = false;
 	bool isBack = false;
+	bool isJump = false;
+	float jumpTime = 0;
 
 	// Use this for initialization
 	void Start () {
 	
 	}
+
+	/*void FixedUpdate ( ) {		
+		if (isJump) {
+			jumpTime += Time.deltaTime;
+			gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 30);
+			if(jumpTime > 0.2f){
+				isJump = false;	
+				jumpTime = 0;
+			}
+		}		
+	}*/
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -90,9 +104,22 @@ public class CharMove : MonoBehaviour {
 		}
 		if (Input.GetKey (KeyCode.D)) 
 		{
-            transform.Translate(transform.right * Time.deltaTime * 2, Space.World);
-			
+            transform.Translate(transform.right * Time.deltaTime * 2, Space.World);			
 		}
+
+		/*if (Input.GetKey (KeyCode.Space)) 
+		{
+			if(!isJump){
+				isJump = true;	
+			}
+		}*/
+
+		
+		if (Input.GetKeyDown(KeyCode.Space)) 
+		{
+			gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 7.0f, 0); 
+		} 
+
         RaycastHit hit;
         if(Physics.Raycast(new Ray(transform.position,-transform.up),out hit))
         {

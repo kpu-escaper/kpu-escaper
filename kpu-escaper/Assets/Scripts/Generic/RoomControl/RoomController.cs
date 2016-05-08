@@ -313,12 +313,12 @@ public class RoomController : MonoBehaviour
 			if (RoomsObject[i].name == CurrentRoom._name && CurrentRoom._type == RoomType.Main)
 			{
 				//Debug.Log (CurrentRoom._type);
-				RoomsObject[i].transform.FindChild("wall_1").GetComponent<DoorController>().block = false;
-				RoomsObject[i].transform.FindChild("wall_2").GetComponent<DoorController>().block = false;
-				RoomsObject[i].transform.FindChild("wall_3").GetComponent<DoorController>().block = false;
-				RoomsObject[i].transform.FindChild("wall_4").GetComponent<DoorController>().block = false;
-				RoomsObject[i].transform.FindChild("wall_5").GetComponent<DoorController>().block = false;
-				RoomsObject[i].transform.FindChild("wall_6").GetComponent<DoorController>().block = false;
+				RoomsObject[i].transform.FindChild("wall_1").GetComponent<DoorController>().block = true;
+				RoomsObject[i].transform.FindChild("wall_2").GetComponent<DoorController>().block = true;
+				RoomsObject[i].transform.FindChild("wall_3").GetComponent<DoorController>().block = true;
+				RoomsObject[i].transform.FindChild("wall_4").GetComponent<DoorController>().block = true;
+				RoomsObject[i].transform.FindChild("wall_5").GetComponent<DoorController>().block = true;
+				RoomsObject[i].transform.FindChild("wall_6").GetComponent<DoorController>().block = true;
 			}
 		}
 	}
@@ -326,12 +326,12 @@ public class RoomController : MonoBehaviour
 	public void UnBlockTheDoor(){
 		for (int i = 0; i < RoomsObject.Length; ++i) {
 			if (RoomsObject [i].name == CurrentRoom._name) {
-				RoomsObject [i].transform.FindChild ("wall_1").GetComponent<DoorController> ().block = true;
-				RoomsObject [i].transform.FindChild ("wall_2").GetComponent<DoorController> ().block = true;
-				RoomsObject [i].transform.FindChild ("wall_3").GetComponent<DoorController> ().block = true;
-				RoomsObject [i].transform.FindChild ("wall_4").GetComponent<DoorController> ().block = true;
-				RoomsObject [i].transform.FindChild ("wall_5").GetComponent<DoorController> ().block = true;
-				RoomsObject [i].transform.FindChild ("wall_6").GetComponent<DoorController> ().block = true;
+				RoomsObject [i].transform.FindChild ("wall_1").GetComponent<DoorController> ().block = false;
+				RoomsObject [i].transform.FindChild ("wall_2").GetComponent<DoorController> ().block = false;
+				RoomsObject [i].transform.FindChild ("wall_3").GetComponent<DoorController> ().block = false;
+				RoomsObject [i].transform.FindChild ("wall_4").GetComponent<DoorController> ().block = false;
+				RoomsObject [i].transform.FindChild ("wall_5").GetComponent<DoorController> ().block = false;
+				RoomsObject [i].transform.FindChild ("wall_6").GetComponent<DoorController> ().block = false;
 			}
 		}			
 	}
@@ -465,4 +465,21 @@ public class RoomController : MonoBehaviour
         return temp;
     }
 
+	public Transform GetCurrentRoomTransform(){
+		int index = 0;
+		for (int i = 0; i < RoomsObject.Length; ++i) {
+			if (RoomsObject [i].name == CurrentRoom._name) {
+				index = i;
+			}
+		}
+		return RoomsObject [index].transform;
+	}
+
+	public bool isMainGame(){
+		if (CurrentRoom._type == RoomType.Main) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

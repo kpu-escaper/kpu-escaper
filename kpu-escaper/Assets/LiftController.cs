@@ -4,15 +4,20 @@ using System.Collections;
 public class LiftController : MonoBehaviour {
 	string direction;
 	bool isCollision = false;
-	GameObject mc;
 
-	// Use this for initialization
-	void Start () {
-		mc = GameObject.Find("MainCharacter");
-	}
+	public static LiftController instance;
 	
-	// Update is called once per frame
+	void Awake()
+	{
+		if (instance == null)
+			instance = this;
+	}
+
 	void Update () {
+		if(Input.GetKey (KeyCode.R)){
+			direction = "lift";
+		}
+
 		switch(direction){
 		case "front":{
 			transform.localPosition = Vector3.Lerp (transform.localPosition, new Vector3 (0, -0.586f, 3.193f), Time.deltaTime*2);
@@ -29,46 +34,28 @@ public class LiftController : MonoBehaviour {
 		case "top":{
 			transform.localPosition = Vector3.Lerp (transform.localPosition, new Vector3 (0, 2.83f, 0), Time.deltaTime*2);
 		}break;
-		default:{
-			transform.localPosition = Vector3.Lerp (transform.localPosition, new Vector3(0, -3.786f, 0), Time.deltaTime*2);
+		case "lift":{
+			transform.localPosition = Vector3.Lerp (transform.localPosition, new Vector3 (0, -3.786f, 0), Time.deltaTime*2);
 		}break;
-		}
-
-		if(isCollision){
-			if(Input.GetKey (KeyCode.R)){
-				mc.transform.SetParent(GameObject.Find("LiftParent").transform);
-				RayEvent.OnLeftClick += OnLeftClick;
-			}
-		}
-		else{
-			RayEvent.OnLeftClick -= OnLeftClick;
+		default:{
+			transform.localPosition = Vector3.Lerp (transform.localPosition, new Vector3(0, 0, 0), Time.deltaTime*2);
+		}break;
 		}
 
 	}
 
 	void OnLeftClick(GameObject obj)
 	{
-		if (obj.name == "Lfront")
-		{
+		if (obj.name == "Lfront") {
 			direction = "front";
-		}
-		else if (obj.name == "Lback")
-		{
+		} else if (obj.name == "Lback") {
 			direction = "back";
-		}
-		else if (obj.name == "Lleft")
-		{
+		} else if (obj.name == "Lleft") {
 			direction = "left";
-		}
-		else if (obj.name == "Lright")
-		{
+		} else if (obj.name == "Lright") {
 			direction = "right";
-
-		}
-		else if (obj.name == "Ltop")
-		{
+		} else if (obj.name == "Ltop") {
 			direction = "top";
-
 		}
 	}
 
@@ -76,6 +63,8 @@ public class LiftController : MonoBehaviour {
 	{
 		if(col.CompareTag("Player"))
 		{
+			RayEvent.OnLeftClick += OnLeftClick;
+			col.transform.SetParent(GameObject.Find("LiftParent").transform);
 			isCollision = true;
 		}    	
 	}
@@ -83,11 +72,16 @@ public class LiftController : MonoBehaviour {
 	void OnTriggerExit(Collider col)
 	{
 		if(col.CompareTag("Player"))
-		{
-			mc.transform.parent = null;
+		{			
+			RayEvent.OnLeftClick -= OnLeftClick;
+			col.transform.parent = null;
 			isCollision = false;
 			direction = "null";
 		}   
+	}
+
+	public void SetInitPos(){
+		transform.localPosition = new Vector3 (0, 7.666f, 0);
 	}
 
 }

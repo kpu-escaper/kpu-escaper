@@ -17,7 +17,6 @@ public class HPManager : MonoBehaviour {
 
     void Awake()
     {
-		Debug.Log ("슙슙");
         if (instance == null)
             instance = this;
         foreach (Image blood in Blood)
