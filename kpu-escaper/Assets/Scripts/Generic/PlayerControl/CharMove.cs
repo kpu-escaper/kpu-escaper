@@ -7,24 +7,11 @@ public class CharMove : MonoBehaviour {
 	bool isRight = false;
 	bool isFront = false;
 	bool isBack = false;
-	bool isJump = false;
-	float jumpTime = 0;
 
 	// Use this for initialization
 	void Start () {
 	
 	}
-
-	/*void FixedUpdate ( ) {		
-		if (isJump) {
-			jumpTime += Time.deltaTime;
-			gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 30);
-			if(jumpTime > 0.2f){
-				isJump = false;	
-				jumpTime = 0;
-			}
-		}		
-	}*/
 
 	
 	// Update is called once per frame
@@ -107,13 +94,6 @@ public class CharMove : MonoBehaviour {
             transform.Translate(transform.right * Time.deltaTime * 2, Space.World);			
 		}
 
-		/*if (Input.GetKey (KeyCode.Space)) 
-		{
-			if(!isJump){
-				isJump = true;	
-			}
-		}*/
-
 		
 		if (Input.GetKeyDown(KeyCode.Space)) 
 		{
@@ -121,14 +101,14 @@ public class CharMove : MonoBehaviour {
 		} 
 
         RaycastHit hit;
-        if(Physics.Raycast(new Ray(transform.position,-transform.up),out hit))
+       /* if(Physics.Raycast(new Ray(transform.position,-transform.up),out hit))
         {
             if (hit.transform.name == "cubeCol")
             {
                 transform.up = hit.normal;
                 Physics.gravity = -9.81f * hit.normal;
             }
-        }
+        }*/
         
 	}
 }

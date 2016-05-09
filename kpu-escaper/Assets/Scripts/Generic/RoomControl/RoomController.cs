@@ -111,6 +111,7 @@ public class RoomController : MonoBehaviour
             }
         }
     }
+
     void ConnectColorToProperty()
     {
         int[] Exp = new int[4];
@@ -146,8 +147,8 @@ public class RoomController : MonoBehaviour
                 SetRoomsProperty();
             }
         }
+	}
 
-    }
     public void LeaveCurrentRoom(string _Name)              //현재방에서 나감
     {
         foreach (Room RoomsInfo in SurroundRoomsInfo)

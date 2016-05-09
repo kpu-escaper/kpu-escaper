@@ -3,11 +3,13 @@ using System.Collections;
 
 public class DoorController : MonoBehaviour {
 
+	public static DoorController instance;
+
 	bool isCollision = false;
 	bool isKeyDown = false;
 	public bool block = false; //임시로 추가
 
-	public static DoorController instance;
+
 	
 	void Awake()
 	{
