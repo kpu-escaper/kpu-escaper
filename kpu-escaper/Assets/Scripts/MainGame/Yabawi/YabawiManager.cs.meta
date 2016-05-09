@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: c7da5ccdd66adb34598a521c24ec850d
+timeCreated: 1462003801
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - BlockObject: {instanceID: 0}
+  - m_GoldMaterial: {instanceID: 0}
+  - m_StoneMaterial: {instanceID: 0}
+  - m_Effects: {instanceID: 0}
+  - m_Effects2: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
