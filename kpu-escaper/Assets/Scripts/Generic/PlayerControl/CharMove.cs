@@ -95,7 +95,7 @@ public class CharMove : MonoBehaviour {
 		}
 
 		
-		if (Input.GetKeyDown(KeyCode.Space)) 
+		if (Input.GetKeyDown(KeyCode.LeftAlt)) 
 		{
 			gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 7.0f, 0); 
 		} 

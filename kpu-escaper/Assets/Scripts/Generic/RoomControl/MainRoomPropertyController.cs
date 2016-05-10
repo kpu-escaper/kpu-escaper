@@ -10,7 +10,8 @@ public abstract class MainRoomPropertyController : RoomPropertyController { // ë
         if(isClearConditionCompleted)
         {
             Clear();
-            isClearConditionCompleted = false;
+            isClearConditionCompleted = false;			
+			LiftManager.instance.TurnOnManager();
         }
     }
 
