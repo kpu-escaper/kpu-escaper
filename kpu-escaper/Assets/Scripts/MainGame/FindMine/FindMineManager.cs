@@ -358,7 +358,7 @@ public class FindMineManager : MainRoomPropertyController
 
 		yield return new WaitForSeconds(3.0f);
 
-		float fAlpha = 1;
+		float fAlpha = 0.51f;
 
 		// 1. 회전하면서 야바위가 하얗게 없어지는 것처럼 보이기 위해 알파값을 점점 줄여준다. 
 		while (fAlpha >= 0) 
