@@ -99,8 +99,6 @@ public class FindMineManager : MainRoomPropertyController
     public override void Update()
     {
         base.Update();
-
-
     }
 
 	// 클리어 했을 때 오브젝트 모두 사라짐 + 문이 열려야함

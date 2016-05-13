@@ -206,6 +206,7 @@ public class RoomController : MonoBehaviour
                 break;
             case RoomType.Main:
                 CurrentModule = MainGameModule[Random.Range(0, MainGameModule.Count)];
+				Debug.Log (CurrentModule.name);
                 CurrentModule.SetActive(true);
                 break;
             case RoomType.Safe:
@@ -483,4 +484,14 @@ public class RoomController : MonoBehaviour
 			return false;
 		}
 	}
+
+	//만약 한번 클리어한 메인게임이면 메인게임 모듈에서 제거
+	public void RemoveMainGame(string MainGameName){
+		for (int i = 0; i < MainGameModule.Count; ++i) {
+			if (MainGameModule [i].name == MainGameName) {
+				MainGameModule.Remove (MainGameModule [i]);
+			}
+		}
+	}
+
 }

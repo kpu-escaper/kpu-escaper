@@ -7,11 +7,16 @@ public abstract class MainRoomPropertyController : RoomPropertyController { // �
 
     public override void Update()   // 해결 되었다면 Clear함수 실행
     {
+		if(Input.GetKey(KeyCode.P)){
+			isClearConditionCompleted = true;
+		}
+
         if(isClearConditionCompleted)
         {
             Clear();
             isClearConditionCompleted = false;			
 			LiftManager.instance.TurnOnManager();
+			RoomController.instance.RemoveMainGame(gameObject.name);
         }
     }
 

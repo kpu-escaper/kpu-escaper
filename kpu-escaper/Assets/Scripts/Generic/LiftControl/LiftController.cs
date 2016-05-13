@@ -14,7 +14,7 @@ public class LiftController : MonoBehaviour {
 	}
 
 	void Update () {
-		if(Input.GetKey (KeyCode.R)){
+		if(Input.GetKeyDown (KeyCode.R)){
 			direction = "lift";
 		}
 

@@ -12,7 +12,7 @@ public class LaserCubeRotate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 pos = player.transform.position - gameObject.transform.localPosition;
+		Vector3 pos = player.transform.position - gameObject.transform.position;
         //float RotateAmount = Time.deltaTime * 10;
 		//transform.Rotate(RotateAmount, RotateAmount, RotateAmount);
 		//transform.forward = pos.normalized;
