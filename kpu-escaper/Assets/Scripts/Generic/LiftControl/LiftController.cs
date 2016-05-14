@@ -38,7 +38,7 @@ public class LiftController : MonoBehaviour {
 			transform.localPosition = Vector3.Lerp (transform.localPosition, new Vector3 (0, -3.786f, 0), Time.deltaTime*2);
 		}break;
 		default:{
-			transform.localPosition = Vector3.Lerp (transform.localPosition, new Vector3(0, 0, 0), Time.deltaTime*2);
+			transform.localPosition = Vector3.Lerp (transform.localPosition, new Vector3(0, 2, 0), Time.deltaTime*2);
 		}break;
 		}
 

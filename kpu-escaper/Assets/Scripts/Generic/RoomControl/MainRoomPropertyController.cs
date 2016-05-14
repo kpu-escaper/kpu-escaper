@@ -16,7 +16,8 @@ public abstract class MainRoomPropertyController : RoomPropertyController { // ë
             Clear();
             isClearConditionCompleted = false;			
 			LiftManager.instance.TurnOnManager();
-			RoomController.instance.RemoveMainGame(gameObject.name);
+			//RoomController.instance.RemoveMainGame(gameObject.name); ////////////////////////// for Demo
+			RoomController.instance.UnBlockTheDoor();
         }
     }
 

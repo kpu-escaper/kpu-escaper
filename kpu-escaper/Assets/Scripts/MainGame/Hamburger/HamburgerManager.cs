@@ -80,7 +80,6 @@ public class HamburgerManager : MainRoomPropertyController{
 				mTime += Time.deltaTime;
 
 			if (mTime > 15) {
-				this.EsAudio5.Play();
 				_isClearConditionCompleted = true;  // 승리처리
 				RoomController.instance.UnBlockTheDoor ();
 
@@ -95,13 +94,13 @@ public class HamburgerManager : MainRoomPropertyController{
 
 						Instantiate (Right_Effect, new Vector3 (BlockList [BlockList.Count - 2].transform.position.x,
 						                                        BlockList [BlockList.Count - 2].transform.position.y,
-						                                        BlockList [BlockList.Count - 2].transform.position.z - 2.0f),
+						                                        BlockList [BlockList.Count - 2].transform.position.z -0.52f),
 						            							BlockList [BlockList.Count - 2].transform.rotation);
 
 						Destroy (BlockList [BlockList.Count - 2]);
 						BlockList.RemoveAt (BlockList.Count - 2);
 						for (int i = 0; i < BlockList.Count; ++i) {
-							BlockList [i].transform.localPosition = new Vector3 (0, -3.5f + 0.4f * i, 0);
+							BlockList [i].transform.localPosition = new Vector3 (0, -3.92f + 0.4f * i, 0);
 						}
 
 					} else {
@@ -135,7 +134,7 @@ public class HamburgerManager : MainRoomPropertyController{
 						this.EsAudio.Play ();
 						Instantiate (Right_Effect, new Vector3 (BlockList [BlockList.Count - 2].transform.position.x,
 							                                    BlockList [BlockList.Count - 2].transform.position.y,
-							                                    BlockList [BlockList.Count - 2].transform.position.z - 2.0f),
+						                                        BlockList [BlockList.Count - 2].transform.position.z -0.52f),
 							            						BlockList [BlockList.Count - 2].transform.rotation);
 
 
@@ -143,7 +142,7 @@ public class HamburgerManager : MainRoomPropertyController{
 						BlockList.RemoveAt (BlockList.Count - 2);
 	                    
 						for (int i = 0; i < BlockList.Count; ++i) {
-							BlockList [i].transform.localPosition = new Vector3 (0, -3.5f + 0.4f * i, 0);
+							BlockList [i].transform.localPosition = new Vector3 (0, -3.92f + 0.4f * i, 0);
 						}
 					} else {
 						this.EsAudio2.Play ();
@@ -175,7 +174,7 @@ public class HamburgerManager : MainRoomPropertyController{
 						this.EsAudio.Play ();
 						Instantiate (Right_Effect, new Vector3 (BlockList [BlockList.Count - 2].transform.position.x,
 						                                    BlockList [BlockList.Count - 2].transform.position.y,
-						                                    BlockList [BlockList.Count - 2].transform.position.z - 2.0f),
+						                                    BlockList [BlockList.Count - 2].transform.position.z -0.52f),
 						            						BlockList [BlockList.Count - 2].transform.rotation);
 					
 
@@ -183,7 +182,7 @@ public class HamburgerManager : MainRoomPropertyController{
 						Destroy (BlockList [BlockList.Count - 2]);
 						BlockList.RemoveAt (BlockList.Count - 2);
 						for (int i = 0; i < BlockList.Count; ++i) {
-							BlockList [i].transform.localPosition = new Vector3 (0, -3.5f + 0.4f * i, 0);
+							BlockList [i].transform.localPosition = new Vector3 (0, -3.92f + 0.4f * i, 0);
 						}
 
 					} else {
@@ -218,7 +217,9 @@ public class HamburgerManager : MainRoomPropertyController{
 
     public override void Clear()
     {
-        mTime = 0;
+		
+		this.EsAudio5.Play();
+		mTime = 0;
 		timeCheck = false;
         foreach(GameObject block in BlockList)
         {
@@ -266,7 +267,7 @@ public class HamburgerManager : MainRoomPropertyController{
 
             for(int i=0;i <BlockList.Count; ++i)
             {
-                BlockList[i].transform.localPosition = new Vector3(0, -3.85f + 0.4f * i, 0);
+				BlockList[i].transform.localPosition = new Vector3(0, -3.92f + 0.4f * i, 0);
             }
 			// 블렇쌓이는 속도조절
             yield return new WaitForSeconds(0.25f);

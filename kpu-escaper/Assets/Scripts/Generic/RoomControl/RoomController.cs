@@ -38,6 +38,8 @@ public class Room
 
 public class RoomController : MonoBehaviour
 {
+	public GameObject tempMain;
+
     public static RoomController instance;              // 싱글톤
 
     Room[] SurroundRoomsInfo = new Room[6];             // 주변 방 정보
@@ -55,6 +57,10 @@ public class RoomController : MonoBehaviour
 
     GameObject CurrentModule;                           // 현재 방 모듈
     RoomPropertyController RoomPropertyRoutine;
+
+	GameObject TempModuleParent; ////////////////////////// for Demo
+	GameObject TempCurrentModule; ////////////////////////// for Demo
+	int TempIndex = 0; ////////////////////////// for Demo
 
     void Awake()
     {
@@ -82,6 +88,8 @@ public class RoomController : MonoBehaviour
     //////////// 초기화 및 색깔과 연산 연결
     void Initialize()
     {
+		TempModuleParent = GameObject.Find("GameModule"); ////////////////////////// for Demo
+
         RoomsObject = new GameObject[transform.childCount];
         for (int RoomObjectIndex = 0; RoomObjectIndex < transform.childCount; ++RoomObjectIndex)
         {
@@ -194,7 +202,7 @@ public class RoomController : MonoBehaviour
             CurrentModule.SetActive(false);
         }
         //////////// 방 루틴 작동
-        switch(CurrentRoom._type)
+		/*switch(CurrentRoom._type)  ////////////////////////// for Demo
         {
             case RoomType.Trap:
                 CurrentModule = TrapModule[Random.Range(0, TrapModule.Count)];
@@ -212,7 +220,25 @@ public class RoomController : MonoBehaviour
             case RoomType.Safe:
                 CurrentModule = null;
                 break;
-        }
+        }*/
+		if (CurrentRoom._name != "EscaperCube-1") { ////////////////////////// for Demo
+			if(TempIndex == TempModuleParent.transform.childCount)
+				TempIndex = 0;
+			CurrentModule = TempModuleParent.transform.GetChild (TempIndex).gameObject; ////////////////////////// for Demo
+
+
+			CurrentModule.SetActive (true); ////////////////////////// for Demo
+			++TempIndex; ////////////////////////// for Demo
+
+			if(CurrentModule.CompareTag("MainGame")){
+				LiftManager.instance.TurnOffManager();
+				BlockTheDoor();
+			}
+			else{
+				LiftManager.instance.TurnOnManager();				
+				UnBlockTheDoor();
+			}
+		}
 
         if (CurrentModule != null)
         {
@@ -487,8 +513,12 @@ public class RoomController : MonoBehaviour
 
 	//만약 한번 클리어한 메인게임이면 메인게임 모듈에서 제거
 	public void RemoveMainGame(string MainGameName){
+		if (MainGameModule.Count == 1) {
+			tempMain.transform.SetParent (GameObject.Find ("GameModule").transform);
+			MainGameModule.Add(tempMain);
+		}
 		for (int i = 0; i < MainGameModule.Count; ++i) {
-			if (MainGameModule [i].name == MainGameName) {
+			if (MainGameModule [i].name == MainGameName && MainGameModule[i].name != "testMain") {
 				MainGameModule.Remove (MainGameModule [i]);
 			}
 		}
