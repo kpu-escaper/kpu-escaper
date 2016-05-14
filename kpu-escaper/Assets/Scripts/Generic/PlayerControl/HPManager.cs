@@ -52,6 +52,7 @@ public class HPManager : MonoBehaviour {
     {
         if(!isCoolDown)
         {
+			CameraShake.instance.ShakeOn ();
             StartCoroutine("CoolDown",(object)DamageAmount);
         }
     }
