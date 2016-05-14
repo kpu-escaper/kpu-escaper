@@ -28,12 +28,14 @@ public class HamburgerManager : MainRoomPropertyController{
 
 	int a = 1;
 
+	bool timeCheck = false;
+
     float mTime = 0;
     List<GameObject> BlockList = new List<GameObject>();
    
     public override void EnterRoom()
     {
-        StartCoroutine("HamburgerGame");
+        //StartCoroutine("HamburgerGame");
 		this.EsAudio = this.gameObject.AddComponent<AudioSource> ();
 		this.EsAudio.clip = this.RightSound;
 		this.EsAudio.loop = false;
@@ -57,25 +59,27 @@ public class HamburgerManager : MainRoomPropertyController{
 
     }
 
+	//public override void Update()
     void Update()
     {
 		//base.Update ();
-		if (Input.GetKeyDown (KeyCode.L)) {
-			Debug.Log ("한번두번");
-		}
 				
 		// 스페이스를 누르면 섞이기 시작
-		/*if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetKeyDown (KeyCode.Space)) {
 			if (a > 0) {
 				StartCoroutine ("HamburgerGame");
 				a--;
+				timeCheck = true;
 			}
-		}*/
+		}
 				
 
 		if (!_isClearConditionCompleted) {
-			mTime += Time.deltaTime;
-			if (mTime > 5) {
+
+			if(timeCheck)
+				mTime += Time.deltaTime;
+
+			if (mTime > 15) {
 				this.EsAudio5.Play();
 				_isClearConditionCompleted = true;  // 승리처리
 				RoomController.instance.UnBlockTheDoor ();
@@ -84,11 +88,9 @@ public class HamburgerManager : MainRoomPropertyController{
 
 			if (BlockList.Count > 1) {
 				if (Input.GetKeyDown (KeyCode.Alpha2)) {
-					Debug.Log ("22");
 					//GetComponent<ParticleSystem>().Play()
 
 					if (BlockList [BlockList.Count - 2].name == "Block_Blue") {
-						Debug.Log ("1");
 						this.EsAudio.Play ();	// 맞춘소리
 
 						Instantiate (Right_Effect, new Vector3 (BlockList [BlockList.Count - 2].transform.position.x,
@@ -103,10 +105,9 @@ public class HamburgerManager : MainRoomPropertyController{
 						}
 
 					} else {
-						Debug.Log ("2");
 						this.EsAudio2.Play ();	// 틀린소리
 
-						/*GameObject NewBlock = Instantiate (BlockPrefab, new Vector3 (0, -1000, 0), BlockPrefab.transform.rotation) as GameObject;
+						GameObject NewBlock = Instantiate (BlockPrefab, new Vector3 (0, -1000, 0), BlockPrefab.transform.rotation) as GameObject;
 						NewBlock.transform.parent = gameObject.transform;
 					
 						switch (Random.Range (0, 3)) {
@@ -125,7 +126,7 @@ public class HamburgerManager : MainRoomPropertyController{
 						}
 						
 						BlockList.Insert (0, NewBlock);
-						this.EsAudio3.Play ();*/
+						this.EsAudio3.Play ();
 					
 					}
 						
@@ -147,7 +148,7 @@ public class HamburgerManager : MainRoomPropertyController{
 					} else {
 						this.EsAudio2.Play ();
 						
-						/*GameObject NewBlock = Instantiate (BlockPrefab, new Vector3 (0, -1000, 0), BlockPrefab.transform.rotation) as GameObject;
+						GameObject NewBlock = Instantiate (BlockPrefab, new Vector3 (0, -1000, 0), BlockPrefab.transform.rotation) as GameObject;
 						NewBlock.transform.parent = gameObject.transform;
 						
 						switch (Random.Range (0, 3)) {
@@ -166,7 +167,7 @@ public class HamburgerManager : MainRoomPropertyController{
 						}
 						
 						BlockList.Insert (0, NewBlock);
-						this.EsAudio3.Play ();*/
+						this.EsAudio3.Play ();
 					}
 	
 				} else if (Input.GetKeyDown (KeyCode.Alpha3)) {
@@ -187,7 +188,7 @@ public class HamburgerManager : MainRoomPropertyController{
 
 					} else {
 						this.EsAudio2.Play ();
-						/*GameObject NewBlock = Instantiate (BlockPrefab, new Vector3 (0, -1000, 0), BlockPrefab.transform.rotation) as GameObject;
+						GameObject NewBlock = Instantiate (BlockPrefab, new Vector3 (0, -1000, 0), BlockPrefab.transform.rotation) as GameObject;
 						NewBlock.transform.parent = gameObject.transform;
 						switch (Random.Range (0, 3)) {
 						case 0:
@@ -205,7 +206,7 @@ public class HamburgerManager : MainRoomPropertyController{
 						}
 						
 						BlockList.Insert (0, NewBlock);
-						this.EsAudio3.Play ();*/
+						this.EsAudio3.Play ();
 
 					}
 				}
@@ -218,6 +219,7 @@ public class HamburgerManager : MainRoomPropertyController{
     public override void Clear()
     {
         mTime = 0;
+		timeCheck = false;
         foreach(GameObject block in BlockList)
         {
 			//BlockList.Remove(block);
@@ -239,7 +241,7 @@ public class HamburgerManager : MainRoomPropertyController{
         GameObject Bomb = Instantiate(BombPrefab, new Vector3(0, -1000, 0), BombPrefab.transform.rotation) as GameObject;
         Bomb.transform.parent = gameObject.transform;
         BlockList.Add(Bomb);
-        while (BlockList.Count<20)
+        while (BlockList.Count<19)
         {
             GameObject NewBlock = Instantiate(BlockPrefab, new Vector3(0, -1000, 0), BlockPrefab.transform.rotation) as GameObject;
             NewBlock.transform.parent = gameObject.transform;
@@ -264,16 +266,21 @@ public class HamburgerManager : MainRoomPropertyController{
 
             for(int i=0;i <BlockList.Count; ++i)
             {
-                BlockList[i].transform.localPosition = new Vector3(0, -3.5f + 0.4f * i, 0);
+                BlockList[i].transform.localPosition = new Vector3(0, -3.85f + 0.4f * i, 0);
             }
 			// 블렇쌓이는 속도조절
             yield return new WaitForSeconds(0.25f);
         }
 
         //.SetActive(true);
-		Instantiate( Explosion, BombPrefab.transform.position, BombPrefab.transform.rotation);
-			
-        _isClearConditionCompleted = true;
+		//Instantiate( Explosion, BombPrefab.transform.localPosition, BombPrefab.transform.rotation);
+		Instantiate (Explosion, new Vector3 (BlockList [BlockList.Count-1].transform.position.x,
+		                                        BlockList [BlockList.Count-1].transform.position.y,
+		                                        BlockList [BlockList.Count-1].transform.position.z - 2.0f),
+		             BlockList [BlockList.Count-1].transform.rotation);
+
+		//_isClearConditionCompleted = true;
+		timeCheck = false;
         // 여기서 패배처리
 
 		this.EsAudio4.Play ();

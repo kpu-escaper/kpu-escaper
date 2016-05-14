@@ -7,7 +7,6 @@ public class MedievalTrapCollision : MonoBehaviour {
         if (col.gameObject.CompareTag("Player"))
         {
 			HPManager.instance.GetDamage(5);
-			HPManager.instance.SetBloodColor("Red");
         }
     }
 }

@@ -16,8 +16,9 @@ public class GasTrapManager : RoomPropertyController
 
     public override void LeaveRoom()
     {
-        StopCoroutine("GasTrapRoutine");
-        Debug.Log("독가스 트랩 방에서 나갔습니다.");
+        StopCoroutine("GasTrapRoutine");		
+		HPManager.instance.SetBloodColor("Red");
+		Debug.Log("독가스 트랩 방에서 나갔습니다.");
     }
 
     IEnumerator GasTrapRoutine()
