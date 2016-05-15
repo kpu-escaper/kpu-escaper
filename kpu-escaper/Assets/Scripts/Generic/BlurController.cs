@@ -15,10 +15,11 @@ public class BlurController : MonoBehaviour {
 	{
 		if (instance == null)
 			instance = this;
+
+		Blur = MainCam.GetComponent<BlurOptimized> ();
 	}
 
 	public void EnterGas(){
-		Blur = MainCam.GetComponent<BlurOptimized> ();
 		Blur.enabled = true;
 		inGasRoom = true;
 	}

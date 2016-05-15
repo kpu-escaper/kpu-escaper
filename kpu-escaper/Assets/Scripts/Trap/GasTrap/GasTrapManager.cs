@@ -31,7 +31,7 @@ public class GasTrapManager : RoomPropertyController
         {
 			HPManager.instance.GetDamage(Damage);
 			HPManager.instance.SetBloodColor("Green");
-            Damage++;
+           	Damage++;
             yield return new WaitForSeconds(1);
         }
     }
