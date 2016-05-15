@@ -22,15 +22,15 @@ public class CameraShake : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown (KeyCode.N)) {
+		/*if (Input.GetKeyDown (KeyCode.N)) {
 			originPos = gameObject.transform.localPosition;
 			isShake = true;
-		}
+		}*/
 
 		if (isShake) {
 			mTime += Time.deltaTime;
 			shakeRange = Random.insideUnitCircle;
-			gameObject.transform.localPosition = new Vector3 (shakeRange.x * shakePower, shakeRange.y * shakePower, 0.0f);
+			gameObject.transform.localPosition = new Vector3 (shakeRange.x * shakePower, shakeRange.y * shakePower, originPos.z);
 			if(mTime > shakeTime){
 				mTime = 0;
 				isShake = false;
