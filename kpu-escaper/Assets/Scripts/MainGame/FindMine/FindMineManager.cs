@@ -105,7 +105,6 @@ public class FindMineManager : MainRoomPropertyController
 	// 서서히 사라지거나 클리어 메시지 뜨도록 수정
     public override void Clear()
     {
-		Debug.Log ("dd");
 		this.EsAudio.clip = this.Mine_Clear;
 		this.EsAudio.loop = false;
 

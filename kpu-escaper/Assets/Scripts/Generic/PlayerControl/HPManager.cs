@@ -66,9 +66,4 @@ public class HPManager : MonoBehaviour {
         yield return new WaitForSeconds(1);
         isCoolDown = false;
     }
-
-    public void ArcReactorTouch(ArcReactorHitInfo hit)
-    {
-        GetDamage(30);
-    }
 }
