@@ -524,4 +524,12 @@ public class RoomController : MonoBehaviour
 		}
 	}
 
+	//현재방을 제외한 나머지 방을 setActive(false)
+	public void turnOffAnotherRoom(){
+		for (int i = 0; i < RoomsObject.Length; ++i) {
+			if (RoomsObject [i].name != CurrentRoom._name)
+				RoomsObject [i].SetActive (false);
+		}
+	}
+
 }

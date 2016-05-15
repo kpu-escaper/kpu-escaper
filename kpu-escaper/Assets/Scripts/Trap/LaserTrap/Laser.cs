@@ -20,8 +20,7 @@ public class Laser : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		_Laser = GetComponent<LineRenderer> ();
-	
+		_Laser = GetComponent<LineRenderer> ();	
 	}
 
 	public void Launch(){

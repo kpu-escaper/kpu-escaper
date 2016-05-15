@@ -263,7 +263,7 @@ public class HamburgerManager : MainRoomPropertyController{
             }
             
             BlockList.Insert(0, NewBlock);
-//			this.EsAudio3.Play ();
+			this.EsAudio3.Play ();
 
             for(int i=0;i <BlockList.Count; ++i)
             {

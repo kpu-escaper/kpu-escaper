@@ -21,29 +21,30 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 	
 	public GameObject BlockPrefab;
 	GameObject Effect;
-
+	
 	public int PathNum = 0;
 	int CurrentPlayerIndex = 0;
 	bool isGameStarted = false;
-
+	
 	private AudioSource EsAudio;	// 오디오 플레이어
 	private AudioSource EsAudio2;	// 오디오 플레이어
-
+	
 	public AudioClip Right_Path;	// 맞는길 골랐을 때
 	public AudioClip Wrong_Path;	// 틀린길 사운드
 	public AudioClip Fall;			// 추락 사운드
-	public AudioClip Clear_Path;			// 클리어 사운드
-
-
-
+	public AudioClip Clear_Path;	// 클리어 사운드
+	public AudioClip Show_Path;		// 길생성 사운드
+	
+	
+	
 	int a = 1;
-
+	
 	void Awake()
 	{
 		this.EsAudio = this.gameObject.AddComponent<AudioSource> ();
 		this.EsAudio2 = this.gameObject.AddComponent<AudioSource> ();
-
-
+		
+		
 		Effect = transform.GetChild(0).gameObject;          //맞았을때 O표 이펙트
 		
 		// 처음만 블록 생성 및 초기화
@@ -52,9 +53,9 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 		{
 			BlockObject[i, j] = Instantiate(BlockPrefab) as GameObject;
 			BlockObject[i, j].transform.parent = gameObject.transform;
-	
+			
 			BlockObject[i, j].transform.rotation = gameObject.transform.rotation;
-
+			
 			BlockObject[i, j].transform.name = i.ToString() + "," + j.ToString();
 			BlockObject[i, j].transform.localPosition = new Vector3(-1.65f + i * 1.1f, -3.7f, -1.65f + j * 1.1f);
 			//BlockObject[i, j].transform.localPosition = new Vector3(-2.25f + i * 1.5f, -3.7f, -2.25f + j * 1.5f);
@@ -65,7 +66,7 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 	
 	public override void EnterRoom()
 	{
-		Debug.Log("메인게임 길찾기 방에 들어왔습니다.");
+		//Debug.Log("메인게임 길찾기 방에 들어왔습니다.");
 		/*
 		Initialize();
 		StartCoroutine("FindPathGame");
@@ -75,45 +76,45 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 	public override void Update()
 	{
 		base.Update();
-
-
+		
+		
 		// 스페이스를 누르면 길생성 시작
 		if (Input.GetKeyDown (KeyCode.Space)) 
 		{
-
+			
 			if(a > 0)
 			{
 				Initialize();
 				StartCoroutine("FindPathGame");
-
+				
 				a--;
 			}
-
+			
 		}
-
-
+		
+		
 	}
 	
 	public override void LeaveRoom()
 	{
-		Debug.Log("메인게임 길찾기 방에서 나갔습니다.");
+		//Debug.Log("메인게임 길찾기 방에서 나갔습니다.");
 	}
 	
 	public override void Clear()
 	{
 		StopCoroutine("FindPathGame");
-
+		
 		StartCoroutine("SlowClear");
-
+		
 		this.EsAudio.clip = this.Clear_Path;
 		this.EsAudio.loop = false;
 		
 		this.EsAudio.Play();
-
-
+		
+		
 		RoomController.instance.UnBlockTheDoor();
-
-		Debug.Log("메인게임 길찾기 클리어 했습니다.");
+		
+		//Debug.Log("메인게임 길찾기 클리어 했습니다.");
 	}
 	
 	// 초기화
@@ -151,40 +152,39 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 					{
 						Effect.transform.position = BlockObject[i, j].transform.position;
 						StartCoroutine("CollisionJudgeRoutine");	// 맞은 표시 이펙트 호출
-
+						
 						PathNum = PathNum + 1;
-
+						
 						this.EsAudio.clip = this.Right_Path;
 						this.EsAudio.loop = false;
-
+						
 						this.EsAudio.Play();
-
+						
 						if( PathNum == 10 )
 							_isClearConditionCompleted = true;
-
+						
 						return;
 					}
-
-
+					
+					
 				}
 			}
 			this.EsAudio.clip = this.Wrong_Path;
 			this.EsAudio.loop = false;
 			
 			this.EsAudio.Play();
-
-
-
+			
+			
 			this.EsAudio2.clip = this.Fall;
 			this.EsAudio2.loop = false;
 			
 			this.EsAudio2.Play();
-
-
+			
+			
 			StartCoroutine("GameOver"); 
 		}
 	}
-
+	
 	// 서서히 없어지게 보이도록
 	IEnumerator SlowClear()
 	{
@@ -200,7 +200,7 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 			for (int i = 0; i < 4; ++i) {
 				for (int j = 0; j < 4; ++j) {
 					BlockObject [i, j].GetComponent<Renderer> ().material.SetColor ("_Color", new Color (1, 1, 1, fAlpha));
-
+					
 				}
 			}
 			yield return null;
@@ -212,11 +212,12 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 				
 			}
 		}
-
+		
 	}
-
-	IEnumerator GameOver()  //게임오버의 예
+	
+	IEnumerator GameOver()  //게임오버시 추락
 	{
+		RoomController.instance.turnOffAnotherRoom ();
 		float time = 0;
 		while (time < 3)
 		{
@@ -225,6 +226,8 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 			time += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
+		Application.LoadLevel ("Retry");
+
 	}
 	
 	IEnumerator CollisionJudgeRoutine() // 이펙트 켜고 인덱스 ++
@@ -242,10 +245,10 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 		// 0번일경우 Up 3번에 X축 이동 6번을 랜덤돌리면 됨
 		// 1번일경우 Up 3번 + Down Up + X축 4번 랜덤
 		// 2번일경우 Up 3번 + Down Up 2세트 + X축 2번 랜덤
-		// 3번일경우 Up 3번 + Down Up 3세트 랜덤
+		// 3번일경우 Up 3번 + Down Up 3세트 랜덤	=> 한 줄로만 나옴
 		for (int i = 0; i < 3;++i)
 			ShuffleList.Add(Direction.Up);
-		switch (Random.Range(0, 4)) 
+		switch (Random.Range(0, 3)) 
 		{
 		case 0:
 			for (int i = 0; i < 6; ++i)
@@ -281,6 +284,8 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 					ShuffleList.Add(Direction.Left);
 			}
 			break;
+			
+			/*
 		case 3:
 			for (int i = 0; i < 3; ++i)
 			{
@@ -288,6 +293,7 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 				ShuffleList.Add(Direction.Down);
 			}
 			break;
+			*/
 		}
 		
 		System.Random rnd = new System.Random();    //리스트 랜덤으로 섞어줌
@@ -360,8 +366,15 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 					randX--;
 				break;
 			}
+			
+			this.EsAudio2.clip = this.Show_Path;
+			this.EsAudio2.loop = false;
+			
+			this.EsAudio2.Play();
+			
 			//BlockObject[randX, randY].GetComponent<Renderer>().material.color = new Color (1, 0, 0); // 빨강
 			BlockObject[randX, randY].GetComponent<Renderer>().material.color = new Color (0.86f, 1, 0); // 노랑
+			
 			yield return new WaitForSeconds(1);
 			//BlockObject[randX, randY].GetComponent<Renderer>().material.color = Color.cyan;
 			BlockObject [randX, randY].GetComponent<Renderer> ().material.color = new Color (1, 1, 1, 0.47f);
