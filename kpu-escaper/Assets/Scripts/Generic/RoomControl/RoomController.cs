@@ -532,4 +532,11 @@ public class RoomController : MonoBehaviour
 		}
 	}
 
+	public bool CurrentRoomCheck(string name){
+		if (name == CurrentRoom._name)
+			return true;
+		else
+			return false;
+	}
+
 }

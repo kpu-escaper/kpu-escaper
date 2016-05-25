@@ -10,8 +10,7 @@ public class GasTrapManager : RoomPropertyController
 	
 	public override void EnterRoom()
 	{
-		bool trap_bool = false;
-		
+		HPManager.instance.EnterGasRoom ();
 		BlurController.instance.EnterGas ();
 		
 		StartCoroutine("GasTrapRoutine");
@@ -33,7 +32,7 @@ public class GasTrapManager : RoomPropertyController
 	
 	public override void LeaveRoom()
 	{
-		trap_bool = true;
+		HPManager.instance.ExitGasRoom ();
 		
 		BlurController.instance.ExitGas ();
 		

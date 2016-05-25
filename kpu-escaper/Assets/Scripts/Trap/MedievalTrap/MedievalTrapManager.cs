@@ -35,10 +35,11 @@ public class MedievalTrapManager : RoomPropertyController
 	{
 		while(true)
 		{
-			for (int i = 0; i < 10; ++i)
+			for (int i = 0; i < 12; ++i)
 			{
 				int randomInt = Random.Range(0, Trap.Length);
-				thornPos = new Vector3(Random.Range (-1106, 890),0,Random.Range (-980,1207));
+				//thornPos = new Vector3(Random.Range (-1106, 890),0,Random.Range (-980,1207));
+				thornPos = new Vector3(Random.Range (-1250, 1510),0,Random.Range (-1470,1370));
 				thornPos = thornPos/1000;
 				Trap[randomInt].transform.localPosition = thornPos;
 				Trap[randomInt].GetComponent<Animation>()["Up Down"].speed = 1;

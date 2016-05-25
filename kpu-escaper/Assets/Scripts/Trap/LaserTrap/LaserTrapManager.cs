@@ -14,6 +14,8 @@ public class LaserTrapManager : RoomPropertyController {
 		this.EsAudio.clip = this.Laser_Sound;
 		this.EsAudio.loop = true;
 
+		EsAudio.volume -= 0.7f;
+
 		Laser = transform.FindChild ("LaserCube").transform.FindChild ("Laser").GetComponent<Laser> ();
 		Laser.instance.Launch ();
 

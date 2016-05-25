@@ -18,8 +18,8 @@ public class CubeRotate : MonoBehaviour
     IEnumerator RotateCoroutine(){
 		yield return new WaitForSeconds(0.3f);
 		float fAngle = 0;
-        while(fAngle<360){
-				float frameAngle = Time.deltaTime * 150;
+        while(fAngle<540){
+				float frameAngle = Time.deltaTime * 200;
 				fAngle += frameAngle;
 				transform.RotateAround(Point, Axis, frameAngle);
 				yield return null;

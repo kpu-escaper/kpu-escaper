@@ -17,6 +17,8 @@ public class HPManager : MonoBehaviour {
 	public bool _isCoolDown { get { return isCoolDown; } set { isCoolDown = value; } }
 	
 	public Image[] Blood;			// 피격시에 표시되는 핏자국 스프라이트
+
+	bool DamageAudioCheck = true;
 	
 	void Awake()
 	{
@@ -60,9 +62,8 @@ public class HPManager : MonoBehaviour {
 		if(!isCoolDown)
 		{
 			CameraShake.instance.ShakeOn ();
-			
-			// 트렙에 변수 하나 만들어서
-			if( GasTrapManager.trap_bool == true )
+
+			if(DamageAudioCheck)
 			{
 				this.EsAudio.Play ();
 			}
@@ -86,10 +87,11 @@ public class HPManager : MonoBehaviour {
 		isCoolDown = false;
 		
 	}
-	
-	public void ArcReactorTouch(ArcReactorHitInfo hit)
-	{
-		GetDamage(30);
-		
+
+	public void EnterGasRoom(){
+		DamageAudioCheck = false;
+	}
+	public void ExitGasRoom(){
+		DamageAudioCheck = true;
 	}
 }

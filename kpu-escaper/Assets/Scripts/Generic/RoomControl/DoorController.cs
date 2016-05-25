@@ -4,10 +4,11 @@ using System.Collections;
 public class DoorController : MonoBehaviour {
 	
 	public static DoorController instance;
-	
+
 	bool isCollision = false;
 	bool isKeyDown = false;
 	public bool block = false; //임시로 추가
+
 	
 	private AudioSource EsAudio;	// 오디오 플레이어
 	public AudioClip Door_Open;		// 문열리는 사운드
@@ -20,7 +21,7 @@ public class DoorController : MonoBehaviour {
 		this.EsAudio.clip = this.Door_Open;
 		this.EsAudio.loop = false;
 		
-		EsAudio.volume -= 0.95f;
+		EsAudio.volume -= 0.5f;
 		
 		if (instance == null)
 			instance = this;
@@ -40,38 +41,41 @@ public class DoorController : MonoBehaviour {
 		if(col.CompareTag("Player"))
 		{
 			isCollision = false;
-			isKeyDown = false;
+			if(isKeyDown){
+				isKeyDown = false;
+				this.EsAudio.Play ();
+			}
+
 		}   
 	}
 	
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.E)) 
-		{
+		if(Input.GetKeyDown(KeyCode.E)){
+			RoomController.instance.UnBlockTheDoor();
+		}
+		if (Input.GetKeyDown (KeyCode.E) && isCollision == true && !block && RoomController.instance.CurrentRoomCheck(transform.parent.name)) {
+			isKeyDown = true;
 			
 			this.EsAudio.Play ();
-			isKeyDown = true;
 		}
 		
 		if (Input.GetKeyDown (KeyCode.M)) {
-			
-			//this.EsAudio.Play ();
 			RoomController.instance.UnBlockTheDoor();
 			LiftManager.instance.TurnOnManager();
 		}
 		
 		
-		if (isCollision && !block && isKeyDown) 
+		//if (isCollision && !block && isKeyDown) 
+		if (!block && isKeyDown) 
 		{
-			this.EsAudio.Play ();
 			transform.FindChild ("Box002").localPosition = Vector3.Lerp (transform.FindChild ("Box002").localPosition, new Vector3 (0, 0.6f, 0), Time.deltaTime * 1.2f);
 			transform.FindChild ("Box003").localPosition = Vector3.Lerp (transform.FindChild ("Box003").localPosition, new Vector3 (0, -0.6f, 0), Time.deltaTime * 1.2f);
 		}
 		
-		else 
+		else
 		{
 			transform.FindChild ("Box002").localPosition = Vector3.Lerp (transform.FindChild ("Box002").localPosition, new Vector3 (0, 0, 0), Time.deltaTime * 1.2f);
 			transform.FindChild ("Box003").localPosition = Vector3.Lerp (transform.FindChild ("Box003").localPosition, new Vector3 (0, 0, 0), Time.deltaTime * 1.2f);
-			
 			
 		}
 		

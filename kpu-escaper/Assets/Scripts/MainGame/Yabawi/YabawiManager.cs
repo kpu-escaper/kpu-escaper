@@ -133,8 +133,10 @@ public class YabawiManager : MainRoomPropertyController{
 	
 	void NotReduplicateRandom()
 	{
-		RandomGoldCube1 = Random.Range(0, 8);
-		RandomGoldCube2 = Random.Range(8, 16);
+		//RandomGoldCube1 = Random.Range(0, 8);
+		//RandomGoldCube2 = Random.Range(8, 16);
+		RandomGoldCube1 = 8;
+		RandomGoldCube2 = 10;
 		if (RandomGoldCube1 == RandomGoldCube2)
 			NotReduplicateRandom();
 	}
