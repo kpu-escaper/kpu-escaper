@@ -7,7 +7,7 @@ public class Choice : MonoBehaviour {
 	GameObject m_SelectedObject;
 
 	public GameObject m_Effects;	// 틀릴 때 불꽃 튀기는 효과
-
+	public GameObject m_Effects2;	// 맞을 때 동그라미 효과
 	
 	// Use this for initialization
 	void Start () {
@@ -31,7 +31,8 @@ public class Choice : MonoBehaviour {
 					if(rayhit.transform.name == "Gold")	// 클릭한 큐브가 황금큐브 일때	
 					{
 						rayhit.transform.GetComponent<Renderer>().material = GameObject.Find("Yaba").GetComponent<RotateManager>().m_GoldMaterial;
-						// "Yaba"오브젝트를 찾아서 RotateManager의 황금큐브 메테리얼 정보를 가져온 후 대입한다  
+						// "Yaba"오브젝트를 찾아서 RotateManager의 황금큐브 메테리얼 정보를 가져온 후 대입한다
+						Instantiate ( m_Effects2, rayhit.transform.position, m_Effects2.transform.rotation );
 					}
 					else // 클릭한 큐브가 황금큐브가 아닐 경우
 					{
