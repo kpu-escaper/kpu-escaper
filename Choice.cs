@@ -19,10 +19,10 @@ public class YabawiManager : MainRoomPropertyController{
     Cube[] m_Cube = new Cube[16];		// 16개 큐브를 동적할당
     bool RotateOrder = false;
 
-
     public GameObject BlockObject;		// 야바위가될 큐브
     public Material m_GoldMaterial;		// 황금야바위 재질
     public Material m_StoneMaterial;	// 일반야바위 재질
+	//public Rigidbody m_rigid;
 
 	public GameObject m_Effects;	// 틀릴 때 불꽃 튀기는 효과
 	public GameObject m_Effects2;	// 맞을 때 동그라미 효과
@@ -39,6 +39,7 @@ public class YabawiManager : MainRoomPropertyController{
     
     void Awake()
     {
+		//m_rigid = GetComponent<Rigidbody>();
         CreateCube();
     }
 
@@ -50,14 +51,19 @@ public class YabawiManager : MainRoomPropertyController{
         RayEvent.OnHover += OnHover;
         RayEvent.OnHoverEnd += OnHoverEnd;
 
-		StartCoroutine("delayTime");
-        StartCoroutine("RotateObjects");
-        StartCoroutine("ChangeMaterial");
     }
 
     public override void Update()
     {
         base.Update();
+
+		// 스페이스를 누르면 섞이기 시작
+		if (Input.GetKeyDown (KeyCode.Space)) 
+		{
+			StartCoroutine("RotateObjects");
+			StartCoroutine("ChangeMaterial");
+		}
+
     }
 
     public override void LeaveRoom()
@@ -69,10 +75,8 @@ public class YabawiManager : MainRoomPropertyController{
     {
         StopCoroutine("FindPathGame");
 
-		for (int i = 0; i < 16; ++i) {
-			m_Cube[i].m_Object.SetActive(false);
+		StartCoroutine ("SlowClear");
 
-		}
 
         Debug.Log("메인게임 야바위 클리어 했습니다.");
     }
@@ -129,9 +133,11 @@ public class YabawiManager : MainRoomPropertyController{
                     }
 
                     GameObject c = Instantiate(BlockObject) as GameObject;
+
                     c.transform.parent = gameObject.transform;
                     c.transform.localPosition = new Vector3(-0.7f + x * 0.7f,-3 + y * 1.0f, z * 0.7f);
                     m_Cube[i] = new Cube(c, new Vector3(x, y, z));
+
                     i++;
                 }
             }
@@ -245,12 +251,40 @@ public class YabawiManager : MainRoomPropertyController{
 
     }
 
-	IEnumerator delayTime()
+
+	// 서서히 없어지게 보이도록
+	IEnumerator SlowClear()
 	{
-		yield return new WaitForSeconds(2.0f);
+		float fAlpha = 1;
+
+		// 클리어시 야바위 알파값 줄여서 천천히 없어지게 보이도록 
+		while (fAlpha >= 0) 
+		{
+			fAlpha -= 0.01f;
+					
+
+			for (int i = 0; i < 16; ++i) 
+			{
+				m_Cube[i].m_Object.GetComponent<Renderer>().material.SetColor("_TintColor", new Color(1, 1, 1, fAlpha));
+				m_Cube[i].m_Object.GetComponent<Renderer>().material.SetColor("_Color", new Color(1, 1, 1, fAlpha));
+				m_Cube[i].m_Object.AddComponent<Rigidbody>();
+			}
+
+			yield return null;
+		
+
+		}
+
+		// 알파값 줄인다음 야바위 없애고 리지드바디 삭제
+		for (int i = 0; i < 16; ++i) 
+		{
+			m_Cube [i].m_Object.SetActive (false);
+			Destroy( m_Cube[i].m_Object.AddComponent<Rigidbody>() );
+		}
+
 
 	}
-
+	
 	// 야바위의 알파값 조절
     IEnumerator ChangeMaterial()
     {
@@ -262,7 +296,7 @@ public class YabawiManager : MainRoomPropertyController{
             fAlpha -= 0.01f;
             for (int i = 0; i < 16; ++i)
             {
-                if (i == RandomGoldCube1 || i == RandomGoldCube2)
+                //if (i == RandomGoldCube1 || i == RandomGoldCube2)
                     m_Cube[i].m_Object.GetComponent<Renderer>().material.SetColor("_TintColor", new Color(1, 1, 1, fAlpha));
             }
             yield return null;
