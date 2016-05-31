@@ -255,6 +255,10 @@ public class YabawiManager : MainRoomPropertyController{
 	// 서서히 없어지게 보이도록
 	IEnumerator SlowClear()
 	{
+
+		for ( int i = 0; i < 16; ++i )
+			m_Cube[i].m_Object.AddComponent<Rigidbody>();
+
 		float fAlpha = 1;
 
 		// 클리어시 야바위 알파값 줄여서 천천히 없어지게 보이도록 
@@ -267,19 +271,17 @@ public class YabawiManager : MainRoomPropertyController{
 			{
 				m_Cube[i].m_Object.GetComponent<Renderer>().material.SetColor("_TintColor", new Color(1, 1, 1, fAlpha));
 				m_Cube[i].m_Object.GetComponent<Renderer>().material.SetColor("_Color", new Color(1, 1, 1, fAlpha));
-				m_Cube[i].m_Object.AddComponent<Rigidbody>();
 			}
 
 			yield return null;
 		
-
 		}
 
 		// 알파값 줄인다음 야바위 없애고 리지드바디 삭제
 		for (int i = 0; i < 16; ++i) 
 		{
 			m_Cube [i].m_Object.SetActive (false);
-			Destroy( m_Cube[i].m_Object.AddComponent<Rigidbody>() );
+			Destroy( m_Cube[i].m_Object.GetComponent<Rigidbody>() );
 		}
 
 
@@ -340,8 +342,6 @@ public class YabawiManager : MainRoomPropertyController{
 				if(YabaNum == 0){
 					_isClearConditionCompleted = true;
 				}
-
-
 
             }
             else
