@@ -24,8 +24,8 @@ public class FindMineManager : MainRoomPropertyController
 
     int[,] MineArray = new int[5, 5];	
 
-	GameObject[,] MineObject = new GameObject[5, 5];	
-	GameObject[,] MineNumber = new GameObject[5, 5];	
+	GameObject[,] MineObject = new GameObject[5, 5];	// 발판
+	GameObject[,] MineNumber = new GameObject[5, 5];	// 발판위에 생성될 숫자 오브젝트	
 
     void Awake()
     {
@@ -43,14 +43,21 @@ public class FindMineManager : MainRoomPropertyController
 
                 //MineObject[i, j].transform.localPosition = new Vector3(-3 + i * 1.5f, -3.7f, -3 + j * 1.5f);
 				MineObject[i, j].transform.localPosition = new Vector3(-2 + i * 1.0f, -3.8f, -2 + j * 1.0f);
+				
+			
+				MineNumber[i, j] = Instantiate( NumberBlockPrefab ) as GameObject;
 
-				MineNumber[i,j] = Instantiate( NumberBlockPrefab,
-			                              new Vector3( MineObject[i,j].transform.position.x,
-			            MineObject[i,j].transform.position.y + 0.3f,
-			            MineObject[i,j].transform.position.z),
-			                              Quaternion.Euler( new Vector3(-90, 0, 0) ) ) as GameObject;
+				MineNumber[i, j].transform.parent = gameObject.transform;
+				MineNumber[i, j].transform.rotation = gameObject.transform.rotation;
+			
+				MineNumber[i, j].transform.localPosition = new Vector3( MineObject[i,j].transform.position.x,
+			                                                       		MineObject[i,j].transform.position.y + 0.3f,
+			                                                       		MineObject[i,j].transform.position.z);
+			
+				MineNumber[i,j].transform.localRotation =  Quaternion.Euler( new Vector3 (-90, 0, 0) );
+						
 				MineNumber[i,j].SetActive(false);
-            }
+	        }
     }
     // Use this for initialization
 
@@ -76,19 +83,7 @@ public class FindMineManager : MainRoomPropertyController
     public override void Clear()
     {
         StopCoroutine("FindMineGame");
-
-        for (int i = 0; i < 5; ++i) 
-		{
-			for (int j = 0; j < 5; ++j) 
-			{
-				MineObject [i, j].SetActive (false);
-				MineNumber [i, j].SetActive (false);
-				
-			}
-		}
-
-		// 문이 열리도록
-
+		StartCoroutine ("SlowClear");
 		 
     }
 
@@ -101,19 +96,21 @@ public class FindMineManager : MainRoomPropertyController
         RayEvent.OnHoverEnd -= OnHoverEnd;
     }
 
-	// 해당 위치를 클릭 했을 때
+	// 왼쪽 마우스 버튼을 클릭 했을 때
     void OnLeftClick(GameObject obj)
     {
-        if (obj.CompareTag("FindMineBlock"))
+        if (obj.CompareTag("FindMineBlock"))	// 클릭한 곳이 발판이라면 아래 로직 실행
         {
             for(int i=0;i<5;++i)
-                for(int j=0;j<5;++j)
-            {
-                if(MineObject[i,j].name == obj.name)
-                {
-                    CalculateMine(i, j);
-                }
-            }
+			{
+				for(int j=0;j<5;++j)
+            	{
+                	if(MineObject[i,j].name == obj.name)
+                	{
+                    	CalculateMine(i, j);
+                	}
+            	}
+			}
         }
     }
 
@@ -304,9 +301,47 @@ public class FindMineManager : MainRoomPropertyController
             }
         }
         if (numofCurrentBeforeBlock <= 3)
-            _isClearConditionCompleted = true;
+			_isClearConditionCompleted = true;
         
     }
+
+	// 서서히 없어지게 보이도록
+	IEnumerator SlowClear()
+	{
+
+		yield return new WaitForSeconds(3.0f);
+
+		float fAlpha = 1;
+
+		// 1. 회전하면서 야바위가 하얗게 없어지는 것처럼 보이기 위해 알파값을 점점 줄여준다. 
+		while (fAlpha >= 0) 
+		{
+			fAlpha -= 0.01f;
+
+			for (int i = 0; i < 5; ++i) 
+			{
+				for (int j = 0; j < 5; ++j) 
+				{
+					MineObject [i, j].GetComponent<Renderer> ().material.SetColor ("_Color", new Color (1, 1, 1, fAlpha));
+					MineNumber [i, j].GetComponent<Renderer> ().material.SetColor ("_Color", new Color (1, 1, 1, fAlpha));
+				}
+			}
+			yield return null;
+		}
+
+		for (int i = 0; i < 5; ++i) 
+		{
+			for (int j = 0; j < 5; ++j) 
+			{
+				MineObject [i, j].SetActive (false);
+				MineNumber [i, j].SetActive (false);
+				
+			}
+		}
+
+
+
+	}
 
     //void DisableExplosion()
     //{
