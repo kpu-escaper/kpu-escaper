@@ -65,14 +65,7 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 	{
 		StopCoroutine("FindPathGame");
 
-		for (int i = 0; i < 4; ++i) 
-		{
-			for (int j = 0; j < 4; ++j) 
-			{
-				BlockObject[i, j].SetActive(false);
-
-			}
-		}
+		StartCoroutine("SlowClear");
 
 		Debug.Log("메인게임 길찾기 클리어 했습니다.");
 	}
@@ -127,6 +120,37 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 			StartCoroutine("GameOver"); 
 		}
 	}
+
+	// 서서히 없어지게 보이도록
+	IEnumerator SlowClear()
+	{
+		
+		yield return new WaitForSeconds (2.0f);
+		
+		float fAlpha = 1;
+		
+		// 1. 회전하면서 야바위가 하얗게 없어지는 것처럼 보이기 위해 알파값을 점점 줄여준다. 
+		while (fAlpha >= 0) {
+			fAlpha -= 0.01f;
+			
+			for (int i = 0; i < 4; ++i) {
+				for (int j = 0; j < 4; ++j) {
+					BlockObject [i, j].GetComponent<Renderer> ().material.SetColor ("_Color", new Color (1, 1, 1, fAlpha));
+
+				}
+			}
+			yield return null;
+		}
+		
+		for (int i = 0; i < 4; ++i) {
+			for (int j = 0; j < 4; ++j) {
+				BlockObject [i, j].SetActive (false);
+				
+			}
+		}
+
+	}
+
 	IEnumerator GameOver()  //게임오버의 예
 	{
 		float time = 0;
@@ -138,6 +162,7 @@ public class MainGameFollowPathManager : MainRoomPropertyController
 			yield return new WaitForEndOfFrame();
 		}
 	}
+	
 	IEnumerator CollisionJudgeRoutine() // 이펙트 켜고 인덱스 ++
 	{
 		
