@@ -15,8 +15,8 @@ public class SphereControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(!max){
-			size += 0.02f;
-			if(size > 0.7f){
+			size += 0.04f;
+			if(size > 1.0f){
 				max = true;
 			}
 		}else{
