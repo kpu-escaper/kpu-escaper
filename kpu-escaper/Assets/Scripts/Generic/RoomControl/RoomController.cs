@@ -58,9 +58,9 @@ public class RoomController : MonoBehaviour
     GameObject CurrentModule;                           // 현재 방 모듈
     RoomPropertyController RoomPropertyRoutine;
 
-	GameObject TempModuleParent; ////////////////////////// for Demo
-	GameObject TempCurrentModule; ////////////////////////// for Demo
-	int TempIndex = 0; ////////////////////////// for Demo
+	//GameObject TempModuleParent; ////////////////////////// for Demo
+	//GameObject TempCurrentModule; ////////////////////////// for Demo
+	//int TempIndex = 0; ////////////////////////// for Demo
 
     void Awake()
     {
@@ -88,7 +88,7 @@ public class RoomController : MonoBehaviour
     //////////// 초기화 및 색깔과 연산 연결
     void Initialize()
     {
-		TempModuleParent = GameObject.Find("GameModule"); ////////////////////////// for Demo
+		//TempModuleParent = GameObject.Find("GameModule"); ////////////////////////// for Demo
 
         RoomsObject = new GameObject[transform.childCount];
         for (int RoomObjectIndex = 0; RoomObjectIndex < transform.childCount; ++RoomObjectIndex)
@@ -202,7 +202,7 @@ public class RoomController : MonoBehaviour
             CurrentModule.SetActive(false);
         }
         //////////// 방 루틴 작동
-		/*switch(CurrentRoom._type)  ////////////////////////// for Demo
+		switch(CurrentRoom._type)  ////////////////////////// for Demo
         {
             case RoomType.Trap:
                 CurrentModule = TrapModule[Random.Range(0, TrapModule.Count)];
@@ -220,8 +220,8 @@ public class RoomController : MonoBehaviour
             case RoomType.Safe:
                 CurrentModule = null;
                 break;
-        }*/
-		if (CurrentRoom._name != "EscaperCube-1") { ////////////////////////// for Demo
+        }
+		/*if (CurrentRoom._name != "EscaperCube-1") { ////////////////////////// for Demo
 			if(TempIndex == TempModuleParent.transform.childCount)
 				TempIndex = 0;
 			CurrentModule = TempModuleParent.transform.GetChild (TempIndex).gameObject; ////////////////////////// for Demo
@@ -238,7 +238,7 @@ public class RoomController : MonoBehaviour
 				LiftManager.instance.TurnOnManager();				
 				UnBlockTheDoor();
 			}
-		}
+		}*/
 
         if (CurrentModule != null)
         {
@@ -261,7 +261,12 @@ public class RoomController : MonoBehaviour
             RoomType SurroundRoomType = CalculateRoomType(CurrentRoom._color, SurroundRoomNumber);  // 색상과 번호에 따른 방 타입 지정
             SurroundRoomsInfo[i] = new Room(SurroundRoomColor, SurroundRoomType, SurroundRoomNumber, "EscaperCube-" + SurroundRoomNumber.ToString());
             Debug.Log("주변방 " + (i + 1).ToString() + ": 방번호 " + SurroundRoomNumber.ToString() + "번, 색상 : " + SurroundRoomColor.ToString() + ", 방속성 : " + SurroundRoomType.ToString());
+			RoomsObject [CurrentRoomIndex].transform.FindChild ("wall_"+(i+1).ToString()).transform.FindChild("RoomNumText").
+				GetComponent<TextMesh> ().text = SurroundRoomNumber.ToString();
         }
+
+
+
 
         for (int i = 0, j = 0; i < RoomsObject.Length; ++i)     // 현재 주변 방 속성을 가지고, 주변방 실제 게임오브젝트를 맞춰줌
         {
@@ -300,22 +305,22 @@ public class RoomController : MonoBehaviour
     {
         switch (_DuplicationCheckIndex)
         {
-            case 0:
+            case 1:
                 RoomsObject[_RoomIndex].transform.position = new Vector3(_CurrentRoomPosition.x - 8.36f, _CurrentRoomPosition.y, _CurrentRoomPosition.z);
                 break;
-            case 1:
+            case 3:
                 RoomsObject[_RoomIndex].transform.position = new Vector3(_CurrentRoomPosition.x + 8.36f, _CurrentRoomPosition.y, _CurrentRoomPosition.z);
                 break;
-            case 2:
+            case 5:
                 RoomsObject[_RoomIndex].transform.position = new Vector3(_CurrentRoomPosition.x, _CurrentRoomPosition.y + 8.36f, _CurrentRoomPosition.z);
                 break;
-            case 3:
+            case 4:
                 RoomsObject[_RoomIndex].transform.position = new Vector3(_CurrentRoomPosition.x, _CurrentRoomPosition.y - 8.36f, _CurrentRoomPosition.z);
                 break;
-            case 4:
+            case 2:
                 RoomsObject[_RoomIndex].transform.position = new Vector3(_CurrentRoomPosition.x, _CurrentRoomPosition.y, _CurrentRoomPosition.z - 8.36f);
                 break;
-            case 5:
+            case 0:
                 RoomsObject[_RoomIndex].transform.position = new Vector3(_CurrentRoomPosition.x, _CurrentRoomPosition.y, _CurrentRoomPosition.z + 8.36f);
                 break;
 
