@@ -53,7 +53,7 @@ public class DoorController : MonoBehaviour {
 		//if(Input.GetKeyDown(KeyCode.E)){
 		//	RoomController.instance.UnBlockTheDoor();
 		//}
-		if (Input.GetKeyDown (KeyCode.JoystickButton0) && isCollision == true && !block && RoomController.instance.CurrentRoomCheck(transform.parent.name)) {
+		if ((Input.GetKeyDown (KeyCode.E) || Input.GetKeyDown (KeyCode.JoystickButton0)) && isCollision == true && !block && RoomController.instance.CurrentRoomCheck(transform.parent.name)) {
 		//if (Input.GetKeyDown (KeyCode.E) && isCollision == true && !block && RoomController.instance.CurrentRoomCheck(transform.parent.name)) {
 			isKeyDown = true;
 			

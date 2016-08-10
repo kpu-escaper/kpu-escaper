@@ -7,6 +7,9 @@ public class CharMove : MonoBehaviour {
 	bool isRight = false;
 	bool isFront = false;
 	bool isBack = false;
+
+	//
+	public GameObject mCamera;
 	
 	private AudioSource EsAudio;	// 오디오 플레이어
 	public AudioClip Walk_Sound;		// 걷는소리
@@ -110,29 +113,32 @@ public class CharMove : MonoBehaviour {
 			GetComponent<Animator> ().SetBool ("isMoving", false);
 		
 
-		if (Input.GetAxis("Vertical")>0)
+		if (Input.GetAxis("Vertical")>0 || Input.GetKey (KeyCode.W))
 		//if (Input.GetKey (KeyCode.W)) 
 		{
 			//transform.Translate(transform.forward * Time.deltaTime * 2, Space.World);
-			transform.Translate(transform.forward * Time.deltaTime * 2, Space.World);
+			transform.Translate((Vector3.Cross(mCamera.transform.right, transform.up).normalized * Time.deltaTime * 2)
+			                    , Space.World);
 			
 		}
-		if (Input.GetAxis("Horizontal")<0)
+		if (Input.GetAxis("Horizontal")<0 || Input.GetKey (KeyCode.A))
 		//if (Input.GetKey (KeyCode.A)) 
 		{
-			transform.Translate(transform.right * Time.deltaTime * -2, Space.World);
+			transform.Translate(mCamera.transform.right * Time.deltaTime * -2, Space.World);
 			
 		}
-		if (Input.GetAxis("Vertical")<0)
+		if (Input.GetAxis("Vertical")<0 || Input.GetKey (KeyCode.S))
 		//if (Input.GetKey (KeyCode.S)) 
 		{
-			transform.Translate(transform.forward * Time.deltaTime * -2, Space.World);
-			
+			//transform.Translate(transform.forward * Time.deltaTime * -2, Space.World);
+			transform.Translate((Vector3.Cross(mCamera.transform.right, transform.up).normalized * Time.deltaTime * -2)
+			                    , Space.World);
+
 		}
-		if (Input.GetAxis("Horizontal")>0)
+		if (Input.GetAxis("Horizontal")>0 || Input.GetKey (KeyCode.D))
 		//if (Input.GetKey (KeyCode.D)) 
 		{
-			transform.Translate(transform.right * Time.deltaTime * 2, Space.World);			
+			transform.Translate(mCamera.transform.right * Time.deltaTime * 2, Space.World);			
 		}
 		
 		

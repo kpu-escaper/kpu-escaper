@@ -20,7 +20,7 @@ public class RayEvent : MonoBehaviour {
 
         if (Physics.Raycast(ray, out hit, 1000))
         {
-            if (Input.GetMouseButtonDown(0))
+			if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.JoystickButton2))
             {
                 if(OnLeftClick!=null)
                     OnLeftClick(hit.transform.gameObject);  //좌클릭했을때

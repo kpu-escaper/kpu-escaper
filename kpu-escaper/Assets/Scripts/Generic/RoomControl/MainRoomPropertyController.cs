@@ -8,7 +8,7 @@ public abstract class MainRoomPropertyController : RoomPropertyController { // �
     public override void Update()   // 해결 되었다면 Clear함수 실행
     {
 
-		if(Input.GetKeyDown(KeyCode.P)){
+		if(Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.RightAlt)){
 			isClearConditionCompleted = true;
 		}
 
