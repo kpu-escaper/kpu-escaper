@@ -157,6 +157,26 @@ public class RoomController : MonoBehaviour
         }
 	}
 
+	/*public void LeaveCurrentRoomVer2(string _Name)
+	{
+		for (int i=0; i<6; i++) {
+			if (RoomsObject [i].name == _Name) {
+				RoomsObject [i].transform.FindChild ("wall_1").transform.FindChild ("RoomNumText").
+					GetComponent<TextMesh> ().text = "";
+				RoomsObject [i].transform.FindChild ("wall_2").transform.FindChild ("RoomNumText").
+					GetComponent<TextMesh> ().text = "";
+				RoomsObject [i].transform.FindChild ("wall_3").transform.FindChild ("RoomNumText").
+					GetComponent<TextMesh> ().text = "";
+				RoomsObject [i].transform.FindChild ("wall_4").transform.FindChild ("RoomNumText").
+					GetComponent<TextMesh> ().text = "";
+				RoomsObject [i].transform.FindChild ("wall_5").transform.FindChild ("RoomNumText").
+					GetComponent<TextMesh> ().text = "";
+				RoomsObject [i].transform.FindChild ("wall_6").transform.FindChild ("RoomNumText").
+					GetComponent<TextMesh> ().text = "";
+			}
+		}
+	}*/
+
     public void LeaveCurrentRoom(string _Name)              //현재방에서 나감
     {
         foreach (Room RoomsInfo in SurroundRoomsInfo)
@@ -261,11 +281,10 @@ public class RoomController : MonoBehaviour
             RoomType SurroundRoomType = CalculateRoomType(CurrentRoom._color, SurroundRoomNumber);  // 색상과 번호에 따른 방 타입 지정
             SurroundRoomsInfo[i] = new Room(SurroundRoomColor, SurroundRoomType, SurroundRoomNumber, "EscaperCube-" + SurroundRoomNumber.ToString());
             Debug.Log("주변방 " + (i + 1).ToString() + ": 방번호 " + SurroundRoomNumber.ToString() + "번, 색상 : " + SurroundRoomColor.ToString() + ", 방속성 : " + SurroundRoomType.ToString());
+
 			RoomsObject [CurrentRoomIndex].transform.FindChild ("wall_"+(i+1).ToString()).transform.FindChild("RoomNumText").
 				GetComponent<TextMesh> ().text = SurroundRoomNumber.ToString();
         }
-
-
 
 
         for (int i = 0, j = 0; i < RoomsObject.Length; ++i)     // 현재 주변 방 속성을 가지고, 주변방 실제 게임오브젝트를 맞춰줌
@@ -274,8 +293,20 @@ public class RoomController : MonoBehaviour
                 continue;
             RoomsObject[i].name = SurroundRoomsInfo[j]._name;
             SetRoomColor(SurroundRoomsInfo[j]._color, RoomsObject[i].transform);
-            ++j;
-        }
+			RoomsObject [i].transform.FindChild ("wall_1").transform.FindChild ("RoomNumText").
+				GetComponent<TextMesh> ().text = "";
+			RoomsObject [i].transform.FindChild ("wall_2").transform.FindChild ("RoomNumText").
+				GetComponent<TextMesh> ().text = "";
+			RoomsObject [i].transform.FindChild ("wall_3").transform.FindChild ("RoomNumText").
+				GetComponent<TextMesh> ().text = "";
+			RoomsObject [i].transform.FindChild ("wall_4").transform.FindChild ("RoomNumText").
+				GetComponent<TextMesh> ().text = "";
+			RoomsObject [i].transform.FindChild ("wall_5").transform.FindChild ("RoomNumText").
+				GetComponent<TextMesh> ().text = "";
+			RoomsObject [i].transform.FindChild ("wall_6").transform.FindChild ("RoomNumText").
+				GetComponent<TextMesh> ().text = "";
+			++j;
+		}
 
 
         //////////// 방 배치 (방중에 현재방을 뺀 나머지 오브젝트를 맞춰줌
@@ -544,4 +575,26 @@ public class RoomController : MonoBehaviour
 			return false;
 	}
 
+	public void RoomNumTextOff(){
+		for (int j=0; j<6; j++) {
+			if(RoomsObject[j].name == CurrentRoom._name){
+				for(int i=0; i<6; i++){
+					RoomsObject[j].transform.FindChild ("wall_"+(i+1).ToString()).
+						transform.FindChild("RoomNumText").gameObject.SetActive(false);
+				}
+				return;
+			}
+		}
+	}
+	public void RoomNumTextOn(){
+		for (int j=0; j<6; j++) {
+			if(RoomsObject[j].name == CurrentRoom._name){
+				for(int i=0; i<6; i++){
+					RoomsObject[j].transform.FindChild ("wall_"+(i+1).ToString()).
+						transform.FindChild("RoomNumText").gameObject.SetActive(true);
+				}
+				return;
+			}
+		}
+	}
 }

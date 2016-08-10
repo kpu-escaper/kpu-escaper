@@ -19,6 +19,7 @@ public class AimingManager : MainRoomPropertyController {
 	public override void EnterRoom(){
 		isBright = true;
 		RayEvent.OnLeftClick += OnLeftClick;
+		RoomController.instance.RoomNumTextOff ();
 		StartCoroutine ("AimingGame");
 	}
 	public override void Update(){
@@ -33,7 +34,9 @@ public class AimingManager : MainRoomPropertyController {
 
 	public override void Clear(){
 		StopCoroutine ("AimingGame");
+
 		StartCoroutine ("BeBright");
+		RoomController.instance.RoomNumTextOn ();
 
 	}
 

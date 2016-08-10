@@ -15,13 +15,13 @@ public class RoomEnterTrigger : MonoBehaviour {
 			}
         }
     }
-    /*
-    void OnTriggerExit(Collider col)
+    
+    /*void OnTriggerExit(Collider col)
     {
         if (col.CompareTag("Player"))
         {
             RoomController.instance.LeaveCurrentRoom(this.name);
         }
-    }
-    */
+    }*/
+    
 }

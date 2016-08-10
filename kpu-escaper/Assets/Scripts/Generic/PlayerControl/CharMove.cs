@@ -19,7 +19,9 @@ public class CharMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+
+
 		if (Input.GetKeyDown (KeyCode.LeftShift)) {
 			GetComponent<Animator> ().SetBool ("isRunning", true); 
 		}
@@ -27,8 +29,9 @@ public class CharMove : MonoBehaviour {
 		{
 			GetComponent<Animator> ().SetBool ("isRunning", false);
 		}
-		
-		if (Input.GetKeyDown (KeyCode.W)) {
+
+		if(Input.GetKeyDown (KeyCode.JoystickButton5)){
+		//if (Input.GetKeyDown (KeyCode.W)) {
 			
 			this.EsAudio.clip = this.Walk_Sound;
 			this.EsAudio.loop = true;
@@ -39,13 +42,15 @@ public class CharMove : MonoBehaviour {
 			GetComponent<Animator> ().SetBool ("isMoving", true);
 			isFront = true;
 		}
-		
-		else if (Input.GetKeyUp (KeyCode.W)) {
+
+		else if(Input.GetKeyUp (KeyCode.JoystickButton5)){
+		//else if (Input.GetKeyUp (KeyCode.W)) {
 			isFront = false;
 			this.EsAudio.loop = false;
 		}
-		
-		if (Input.GetKeyDown (KeyCode.A)) {
+
+		if(Input.GetKeyDown (KeyCode.JoystickButton7)){
+		//if (Input.GetKeyDown (KeyCode.A)) {
 			
 			this.EsAudio.loop = true;
 			this.EsAudio.Play();
@@ -53,14 +58,16 @@ public class CharMove : MonoBehaviour {
 			GetComponent<Animator> ().SetBool ("isMoving", true);
 			isLeft = true;
 		}
-		
-		else if (Input.GetKeyUp (KeyCode.A)) {
+
+		else if(Input.GetKeyUp (KeyCode.JoystickButton7)){
+		//else if (Input.GetKeyUp (KeyCode.A)) {
 			isLeft = false;
 			this.EsAudio.loop = false;
 			
 		}
-		
-		if (Input.GetKeyDown (KeyCode.S)) {
+
+		if(Input.GetKeyDown (KeyCode.JoystickButton6)){
+		//if (Input.GetKeyDown (KeyCode.S)) {
 			
 			this.EsAudio.loop = true;
 			this.EsAudio.Play();
@@ -69,14 +76,16 @@ public class CharMove : MonoBehaviour {
 			GetComponent<Animator> ().SetBool ("isMoving", true);
 			isBack = true;
 		}
-		
-		else if (Input.GetKeyUp (KeyCode.S)) {
+
+		else if(Input.GetKeyUp (KeyCode.JoystickButton6)){
+		//else if (Input.GetKeyUp (KeyCode.S)) {
 			isBack = false;
 			this.EsAudio.loop = false;
 			
 		}
-		
-		if (Input.GetKeyDown (KeyCode.D)) {
+
+		if(Input.GetKeyDown (KeyCode.JoystickButton8)){
+		//if (Input.GetKeyDown (KeyCode.D)) {
 			
 			this.EsAudio.loop = true;
 			this.EsAudio.Play();
@@ -84,8 +93,9 @@ public class CharMove : MonoBehaviour {
 			GetComponent<Animator> ().SetBool ("isMoving", true);
 			isRight = true;
 		}
-		
-		else if (Input.GetKeyUp (KeyCode.D)) {
+
+		else if(Input.GetKeyUp (KeyCode.JoystickButton8)){
+		//else if (Input.GetKeyUp (KeyCode.D)) {
 			isRight = false;
 			this.EsAudio.loop = false;
 			
@@ -99,25 +109,28 @@ public class CharMove : MonoBehaviour {
 		if(!isRight && !isLeft && !isBack && !isFront)
 			GetComponent<Animator> ().SetBool ("isMoving", false);
 		
-		
-		if (Input.GetKey (KeyCode.W)) 
+
+		if (Input.GetAxis("Vertical")>0)
+		//if (Input.GetKey (KeyCode.W)) 
 		{
 			//transform.Translate(transform.forward * Time.deltaTime * 2, Space.World);
 			transform.Translate(transform.forward * Time.deltaTime * 2, Space.World);
 			
 		}
-		
-		if (Input.GetKey (KeyCode.A)) 
+		if (Input.GetAxis("Horizontal")<0)
+		//if (Input.GetKey (KeyCode.A)) 
 		{
 			transform.Translate(transform.right * Time.deltaTime * -2, Space.World);
 			
 		}
-		if (Input.GetKey (KeyCode.S)) 
+		if (Input.GetAxis("Vertical")<0)
+		//if (Input.GetKey (KeyCode.S)) 
 		{
 			transform.Translate(transform.forward * Time.deltaTime * -2, Space.World);
 			
 		}
-		if (Input.GetKey (KeyCode.D)) 
+		if (Input.GetAxis("Horizontal")>0)
+		//if (Input.GetKey (KeyCode.D)) 
 		{
 			transform.Translate(transform.right * Time.deltaTime * 2, Space.World);			
 		}
